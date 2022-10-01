@@ -3,10 +3,10 @@ using UnityEngine.InputSystem;
 using Cinemachine;
 using System.Collections;
 
-public class PlayerZoomMovement : PlayerMovement
+public class ZoomieCat : PlayerMovement
 {
-    bool isBoosting;
     private Coroutine speedCharge;
+    [SerializeField] private float speedMultiplier = 2f;
 
     [Header("States")]
     [SerializeField] private bool chargingZoomie;
@@ -15,13 +15,23 @@ public class PlayerZoomMovement : PlayerMovement
     [Header("Settings")]
     [SerializeField] private float chargeTime = 1.5f;
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
-        float movementSpeed = 1f; // Temp;
-        float speed = movementSpeed * (isBoosting ? 2 : 1);
+        // If charging, LERP the cat speed to max
+        // If activeZoomie, multiply the cat speed
+
+        //float speed = movementSpeed * (activeZoomie ? 2 : 1);
+
+        if (activeZoomie)
+        {
+            playerRB.AddForce(moveDir * speed * speedMultiplier, ForceMode.Acceleration);
+
+        }
+        if (movementDirection.magnitude <= .05)
+        {
+            ChargeZoomie(false);
+        }
     }
-
-
 
     void ChargeZoomie(bool state)
     {
@@ -33,7 +43,11 @@ public class PlayerZoomMovement : PlayerMovement
         }
         else
         {
-            StopCoroutine(speedCharge);
+            if (speedCharge != null)
+            {
+                StopCoroutine(speedCharge);
+            }
+            
         }
 
         IEnumerator ChangeCoroutine()
@@ -47,18 +61,21 @@ public class PlayerZoomMovement : PlayerMovement
     {
         chargingZoomie = false;
         activeZoomie = state;
+        Debug.Log("Zoomie");
     }
 
     //All Inputs
     #region Input
 
-    void OnSpeedBoost()
+    public void OnZoomie(InputAction.CallbackContext ctx)
     {
         //  && movementInput.x != 0 Check if movement direction is not 0
-        if (!chargingZoomie && !activeZoomie)
+        //  
+        if (!chargingZoomie && !activeZoomie && ctx.action.triggered && movementDirection.magnitude > .05)
         {
             ChargeZoomie(true);
         }
+        
     }
 
     #endregion
