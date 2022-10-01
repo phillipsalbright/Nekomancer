@@ -16,7 +16,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] protected Vector3 moveDir;
     float turnSmoothVelocity;
     [SerializeField] private Transform cam;
-    public void OnMove(InputAction.CallbackContext ctx)
+    [SerializeField] protected GameObject visuals;
+    public virtual void OnMove(InputAction.CallbackContext ctx)
     {
         movementInput = ctx.ReadValue<Vector2>().normalized;
     }
@@ -26,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
         playerRB.drag = dragVal;
     }
 
-    public void OnMouse(InputAction.CallbackContext ctx)
+    public virtual void OnMouse(InputAction.CallbackContext ctx)
     {
         mouseInput = ctx.ReadValue<Vector2>().normalized;
     }
