@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Zoomie",
+                    "type": "Button",
+                    "id": "96fc6f4a-8b37-40fd-8df0-99ee56dd3ae8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -271,6 +280,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "MouseInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c29dc682-c0e1-4035-9dd7-34582efc0439",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoomie",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fefb4a91-f4f0-4863-b7be-69c41cdf59b2",
+                    "path": "<Gamepad>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoomie",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
