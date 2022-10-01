@@ -9,6 +9,8 @@ public class HUD : MonoBehaviour
     [SerializeField] private GameObject[] notPauseMenu;
     // Start is called before the first frame update
 
+    [SerializeField]
+    AudioSource catAudio;
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -20,6 +22,7 @@ public class HUD : MonoBehaviour
         {
             if (!paused)
             {
+                catAudio.Pause();
                 paused = true;
                 for (int i =0;i < notPauseMenu.Length; i++)
                 {
@@ -34,6 +37,7 @@ public class HUD : MonoBehaviour
 
     public void Resume()
     {
+        catAudio.UnPause();
         paused = false;
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
