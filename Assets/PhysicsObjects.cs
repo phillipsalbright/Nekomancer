@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class PhysicsObjects : MonoBehaviour
 {
-    [SerializeField]
-    List<GameObject> physicsObjects;
-    [SerializeField]
-    BoxCollider boxCollider;
-    [SerializeField]
-    ZoomieCat zoomieCatRef;
+    [SerializeField] List<GameObject> physicsObjects;
+    [SerializeField] BoxCollider boxCollider;
+    [SerializeField] ZoomieCat zoomieCatRef;
+    [SerializeField] bool isInteractable = false;
 
     private void Awake()
     {
@@ -17,17 +15,28 @@ public class PhysicsObjects : MonoBehaviour
         zoomieCatRef = FindObjectOfType<ZoomieCat>();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        
+        // 
+        if (zoomieCatRef.IsInTrigger() && zoomieCatRef.enabled && zoomieCatRef.IsZooming())
+        {
+            isInteractable = true;
+            foreach (var item in physicsObjects)
+            {
+                item.GetComponent<Rigidbody>().isKinematic = false;
+
+            }
+        }
+        else
+        {
+
+            isInteractable = false;
+            //foreach (var item in physicsObjects)
+            //{
+            //    item.GetComponent<Rigidbody>().isKinematic = true;
+            //}
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // Check if zoomie cat is active
-        // If zoomie cat is in trigger enable rigid body
-        // else disable rigidbody
-    }
+    
 }
