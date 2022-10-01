@@ -13,11 +13,16 @@ public class RollyCat : PlayerMovement
     public void OnEnable()
     {
         base.OnEnable();
+        audioManager = GetComponent<AudioSource>();
+        audioManager.clip = activeClip;
+        audioManager.loop = true;
+        audioManager.Play();
         playerRB.useGravity = false;
     }
 
     public void OnDisable()
     {
+        audioManager.Stop();
         playerRB.useGravity = true;
     }
 

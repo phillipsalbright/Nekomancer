@@ -30,7 +30,7 @@ public class PlayerMovement : Ability
         visuals.SetActive(true);
     }
 
-    private void OnDisable()
+    protected void OnDisable()
     {
         visuals.SetActive(false);
     }

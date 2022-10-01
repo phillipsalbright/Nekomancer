@@ -14,6 +14,8 @@ public class Ingredient : MonoBehaviour
     protected bool ingredientPickup = false;
     protected InventorySystem invSystem;
 
+    public GameObject relObj;
+
     protected void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
@@ -36,6 +38,10 @@ public class Ingredient : MonoBehaviour
         if (ingredientPickup && ctx.performed)
         {
             invSystem.AddIngredient(this);
+            if (relObj != null)
+            {
+                relObj.SetActive(true);
+            }
             Destroy(gameObject);
         }
     }

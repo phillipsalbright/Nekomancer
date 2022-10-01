@@ -5699,7 +5699,7 @@ MonoBehaviour:
   - {fileID: 7170987425899937303, guid: c722ecfcff71d7443903b1c678a7783c, type: 3}
   - {fileID: 1418593879746999955, guid: 4c32708222cd5fa41bda9994c52356df, type: 3}
   abilityState: 2
-  activeClip: {fileID: 8300000, guid: 0218fc244ee694e43a1d1b7a4b237679, type: 3}
+  activeClip: {fileID: 8300000, guid: 64109fcad1364e64a8402868cb488816, type: 3}
   playerRB: {fileID: 3304710980469724914}
   speed: 50
   jumpForce: 15
