@@ -2,21 +2,22 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : Ability
 {
     protected Vector2 movementInput = new Vector2(0, 0);
     protected Vector3 movementDirection;
     private Vector2 mouseInput = new Vector2(0, 0);
     protected bool jumpPressed = false;
     [SerializeField] protected Rigidbody playerRB;
-    [SerializeField] protected float speed = 10f;
+    [SerializeField] private float speed = 10f;
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private float turnSmoothTime = .1f;
     [SerializeField] private float dragVal = 2;
     [SerializeField] protected Vector3 moveDir;
     float turnSmoothVelocity;
     [SerializeField] private Transform cam;
-    public void OnMove(InputAction.CallbackContext ctx)
+    [SerializeField] protected GameObject visuals;
+    public virtual void OnMove(InputAction.CallbackContext ctx)
     {
         movementInput = ctx.ReadValue<Vector2>().normalized;
     }
@@ -24,9 +25,15 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         playerRB.drag = dragVal;
+        visuals.SetActive(true);
     }
 
-    public void OnMouse(InputAction.CallbackContext ctx)
+    private void OnDisable()
+    {
+        visuals.SetActive(false);
+    }
+
+    public virtual void OnMouse(InputAction.CallbackContext ctx)
     {
         mouseInput = ctx.ReadValue<Vector2>().normalized;
     }
@@ -45,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        Vector3 movementDirection = new Vector3(movementInput.x, 0, movementInput.y);
+        movementDirection = new Vector3(movementInput.x, 0, movementInput.y);
 
         if (movementDirection.magnitude > .05)
         {
