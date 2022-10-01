@@ -239,6 +239,8 @@ GameObject:
   - component: {fileID: 3304710980469724914}
   - component: {fileID: 3304710980469724915}
   - component: {fileID: 3304710980469724912}
+  - component: {fileID: 1615911554162644225}
+  - component: {fileID: 5921202711039865665}
   m_Layer: 3
   m_Name: BasePlayer
   m_TagString: Untagged
@@ -345,6 +347,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: aee146f2-fbcb-46a5-a3cd-0ed7c4e10d8c
     m_ActionName: PlayerMove/MouseInput[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 18607d4e-aba3-4722-9ef8-2315c062673b
+    m_ActionName: PlayerMove/Interact[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMove
@@ -367,6 +373,35 @@ MonoBehaviour:
   jumpForce: 10
   turnSmoothTime: 0.1
   cam: {fileID: 0}
+--- !u!114 &1615911554162644225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3304710980469724922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d41efb38f4f8994eac362351ec35e37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+--- !u!114 &5921202711039865665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3304710980469724922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 689bda72b5734b64fb105a75006a0d52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &3304710980704704452
 GameObject:
   m_ObjectHideFlags: 0

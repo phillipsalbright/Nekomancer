@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3015769524076042130}
   - component: {fileID: 3015769524076042129}
   - component: {fileID: 3015769524076042128}
-  - component: {fileID: 3015769524076042132}
+  - component: {fileID: -4830280463879851347}
   m_Layer: 0
   m_Name: ClawOfCat
   m_TagString: Untagged
@@ -98,7 +98,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3015769524076042132
+--- !u!114 &-4830280463879851347
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,8 +107,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 3015769524076042143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 935cabe4c08dcac4d98be6280119d065, type: 3}
+  m_Script: {fileID: 11500000, guid: b2f31f2f8f871ed45b2fe50ac4750052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ingSprite: {fileID: 0}
-  IngredientName: FeatherOfCrow
+  IngredientName: ClawOfCat

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4287268749565683512}
   - component: {fileID: 4287268749565683515}
   - component: {fileID: 4287268749565683514}
-  - component: {fileID: 4287268749565683518}
+  - component: {fileID: -6658213697511834449}
   m_Layer: 0
   m_Name: FurOfCat
   m_TagString: Untagged
@@ -98,7 +98,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4287268749565683518
+--- !u!114 &-6658213697511834449
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,8 +107,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4287268749565683509}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 935cabe4c08dcac4d98be6280119d065, type: 3}
+  m_Script: {fileID: 11500000, guid: b2f31f2f8f871ed45b2fe50ac4750052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ingSprite: {fileID: 0}
-  IngredientName: FeatherOfCrow
+  IngredientName: FurOfCat

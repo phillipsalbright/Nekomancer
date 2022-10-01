@@ -7,19 +7,14 @@ public class Ingredient : MonoBehaviour
 {
 
     [SerializeField]
-    private Sprite ingSprite;
+    protected Sprite ingSprite;
     [SerializeField]
-    private string IngredientName;
+    protected string IngredientName;
 
-    bool ingredientPickup = false;
-    InventorySystem invSystem;
+    protected bool ingredientPickup = false;
+    protected InventorySystem invSystem;
 
-    private void Start()
-    {
-        //controls interact Pickup
-    }
-
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -28,11 +23,12 @@ public class Ingredient : MonoBehaviour
         }
     }
 
-    void Pickup(CallbackContext ctx)
+    public virtual void Pickup(CallbackContext ctx)
     {
         if (ingredientPickup)
         {
             invSystem.AddIngredient(this);
+            Destroy(this);
         }
     }
 
