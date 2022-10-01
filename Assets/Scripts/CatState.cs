@@ -20,8 +20,14 @@ public class CatState : MonoBehaviour
 
     public GameObject finalForm;
 
+    AudioSource audioManager;
+
+    [SerializeField]
+    AudioClip switchSound;
+
     private void Start()
     {
+        audioManager = GetComponent<AudioSource>();
         foreach(Ability ability in GetComponentsInChildren<Ability>())
         {
             stateDictionary.Add(ability.GetStringRep(), ability.GetState());
@@ -52,6 +58,11 @@ public class CatState : MonoBehaviour
 
     void SetState(States newState)
     {
+        if (newState == currentState)
+            return;
+        audioManager.clip = switchSound;
+        audioManager.loop = false;
+        audioManager.Play();
         SetObjEnabled(false);
         currentState = newState;
         SetObjEnabled(true);

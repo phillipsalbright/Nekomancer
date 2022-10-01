@@ -20,8 +20,11 @@ public class InventorySystem : MonoBehaviour
 
     CatState catState;
 
+    AudioSource meowSource;
+
     private void Start()
     {
+        meowSource = GetComponentsInChildren<AudioSource>()[1];
         catState = GetComponent<CatState>();
         foreach (Image itemImage in itemImages)
         {
@@ -33,6 +36,7 @@ public class InventorySystem : MonoBehaviour
     {
         if (counter == 3)
             return;
+        meowSource.Play();
         itemImages[counter].sprite = ingredient.GetSprite();
         itemImages[counter].gameObject.SetActive(true);
         ingredients.Add(ingredient.GetIngredientName());
@@ -41,6 +45,7 @@ public class InventorySystem : MonoBehaviour
 
     public void AddMainIngredient(MainIngredient ingredient)
     {
+        meowSource.Play();
         switch (ingredient.GetIngredientName())
         {
             default:
@@ -77,4 +82,6 @@ public class InventorySystem : MonoBehaviour
         catState.ApplyPotion(string.Join(",", ingredients));
         ingredients.Clear();
     }
+
+
 }
