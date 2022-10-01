@@ -17,6 +17,8 @@ public class CatState : MonoBehaviour
 
     Dictionary<States, Ability> abilityDictionary = new Dictionary<States, Ability>();
 
+    [SerializeField] private ParticleSystem transformation;
+
     private void Start()
     {
         foreach(Ability ability in GetComponentsInChildren<Ability>())
@@ -32,6 +34,8 @@ public class CatState : MonoBehaviour
             SetState(stateDictionary[potion]);
         else
             SetState(States.Zombie);
+
+        transformation.Play();
     }
 
     void SetState(States newState)
