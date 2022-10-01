@@ -943,6 +943,7 @@ MonoBehaviour:
   notPauseMenu:
   - {fileID: 7080610733423589179}
   - {fileID: 7080610733728076567}
+  catAudio: {fileID: 0}
 --- !u!114 &2095581985366095583
 MonoBehaviour:
   m_ObjectHideFlags: 0
