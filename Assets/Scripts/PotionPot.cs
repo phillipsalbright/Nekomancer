@@ -8,12 +8,6 @@ public class PotionPot : MonoBehaviour
     bool ingredientPickup = false;
     InventorySystem invSystem;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //set up controller interact
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
