@@ -7,6 +7,7 @@ public class Ability : MonoBehaviour
     [SerializeField]
     List<Ingredient> ingredients = new List<Ingredient>();
 
+    [SerializeField]
     CatState.States abilityState;
 
     public string GetStringRep()
