@@ -834,7 +834,6 @@ GameObject:
   - component: {fileID: 7080610733925546216}
   - component: {fileID: 7080610733925546217}
   - component: {fileID: 7080610733925546218}
-  - component: {fileID: 7080610733925546219}
   - component: {fileID: 2660817297247371952}
   - component: {fileID: 2095581985366095583}
   m_Layer: 5
@@ -928,25 +927,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7080610733925546219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7080610733925546220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 689bda72b5734b64fb105a75006a0d52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemImages:
-  - {fileID: 7080610735027229089}
-  - {fileID: 7080610734518334325}
-  - {fileID: 7080610734459502648}
-  ClawOfCat: {fileID: 0}
-  WhiskerOfCat: {fileID: 0}
-  FurOfCat: {fileID: 0}
 --- !u!114 &2660817297247371952
 MonoBehaviour:
   m_ObjectHideFlags: 0
