@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 mouseInput = new Vector2(0, 0);
     protected bool jumpPressed = false;
     [SerializeField] protected Rigidbody playerRB;
-    [SerializeField] protected float speed = 10f;
+    [SerializeField] private float speed = 10f;
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private float turnSmoothTime = .1f;
     [SerializeField] private float dragVal = 2;
@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        Vector3 movementDirection = new Vector3(movementInput.x, 0, movementInput.y);
+        movementDirection = new Vector3(movementInput.x, 0, movementInput.y);
 
         if (movementDirection.magnitude > .05)
         {
