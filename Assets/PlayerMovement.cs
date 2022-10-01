@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float turnSmoothTime = .1f;
     float turnSmoothVelocity;
     [SerializeField] private Transform cam;
-    [SerializeField] private Transform camVals;
     public void OnMove(InputAction.CallbackContext ctx)
     {
         movementInput = ctx.ReadValue<Vector2>().normalized;
@@ -36,15 +35,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (movementInput.magnitude == 0 || mouseInput.magnitude != 0)
-        {
-            camVals.position = cam.position;
-            camVals.rotation = cam.rotation;
-        }
-    }
-
     private void FixedUpdate()
     {
         Vector3 movementDirection = new Vector3(movementInput.x, 0, movementInput.y);
@@ -52,12 +42,22 @@ public class PlayerMovement : MonoBehaviour
         if (movementDirection.magnitude > .05)
         {
 
-            float targetAngle = Mathf.Atan2(movementDirection.x, movementDirection.z) * Mathf.Rad2Deg + camVals.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(movementDirection.x, movementDirection.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             playerRB.AddForce(moveDir * speed, ForceMode.Acceleration);
+            if (movementDirection.x > 0)
+            {
+               FindObjectOfType<CinemachineFreeLook>().m_RecenterToTargetHeading.m_enabled = true;
+            } else
+            {
+                FindObjectOfType<CinemachineFreeLook>().m_RecenterToTargetHeading.m_enabled = false;
+            }
 
+        } else
+        {
+            FindObjectOfType<CinemachineFreeLook>().m_RecenterToTargetHeading.m_enabled = false;
         }
         
         if (Physics.Raycast(this.transform.position, new Vector3(0, -1f, 0), 1.1f) && jumpPressed) {
