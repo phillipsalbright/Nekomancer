@@ -4,7 +4,7 @@ using Cinemachine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Vector2 movementInput = new Vector2(0, 0);
+    protected Vector2 movementInput = new Vector2(0, 0);
     private Vector2 mouseInput = new Vector2(0, 0);
     private bool jumpPressed = false;
     [SerializeField] private Rigidbody playerRB;
@@ -13,12 +13,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float turnSmoothTime = .1f;
     float turnSmoothVelocity;
     [SerializeField] private Transform cam;
-    public void OnMove(InputAction.CallbackContext ctx)
+    [SerializeField] protected GameObject visuals;
+    
+    public virtual void OnMove(InputAction.CallbackContext ctx)
     {
         movementInput = ctx.ReadValue<Vector2>().normalized;
     }
 
-    public void OnMouse(InputAction.CallbackContext ctx)
+    public virtual void OnMouse(InputAction.CallbackContext ctx)
     {
         mouseInput = ctx.ReadValue<Vector2>().normalized;
     }
