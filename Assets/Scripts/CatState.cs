@@ -22,6 +22,8 @@ public class CatState : MonoBehaviour
 
     AudioSource audioManager;
 
+    [SerializeField] ParticleSystem transformation;
+
     [SerializeField]
     AudioClip switchSound;
 
@@ -41,6 +43,9 @@ public class CatState : MonoBehaviour
             SetState(stateDictionary[potion]);
         else
             SetState(States.Zombie);
+
+
+        transformation.Play();
     }
 
     public void FinalState()
