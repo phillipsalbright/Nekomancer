@@ -23,7 +23,7 @@ public class PotionPot : MonoBehaviour
         }
     }
 
-    void Craft(CallbackContext ctx)
+    public void Craft(CallbackContext ctx)
     {
         if (ingredientPickup)
         {
