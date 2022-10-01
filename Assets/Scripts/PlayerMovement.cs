@@ -6,16 +6,22 @@ public class PlayerMovement : MonoBehaviour
 {
     private Vector2 movementInput = new Vector2(0, 0);
     private Vector2 mouseInput = new Vector2(0, 0);
-    private bool jumpPressed = false;
+    protected bool jumpPressed = false;
     [SerializeField] private Rigidbody playerRB;
     [SerializeField] private float speed = 10f;
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private float turnSmoothTime = .1f;
+    [SerializeField] private float dragVal = 2;
     float turnSmoothVelocity;
     [SerializeField] private Transform cam;
     public void OnMove(InputAction.CallbackContext ctx)
     {
         movementInput = ctx.ReadValue<Vector2>().normalized;
+    }
+
+    private void OnEnable()
+    {
+        playerRB.drag = dragVal;
     }
 
     public void OnMouse(InputAction.CallbackContext ctx)
@@ -47,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             playerRB.AddForce(moveDir * speed, ForceMode.Acceleration);
-            if (movementDirection.x > 0)
+            if (movementDirection.x != 0)
             {
                FindObjectOfType<CinemachineFreeLook>().m_RecenterToTargetHeading.m_enabled = true;
             } else
