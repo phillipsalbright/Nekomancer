@@ -74,5 +74,6 @@ public class InventorySystem : MonoBehaviour
         counter = 0;
         ingredients.Sort();
         catState.ApplyPotion(string.Join(",", ingredients));
+        ingredients.Clear();
     }
 }
