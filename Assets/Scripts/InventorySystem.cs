@@ -7,9 +7,16 @@ public class InventorySystem : MonoBehaviour
 {
     [SerializeField]
     Image[] itemImages = new Image[3];
+    [SerializeField]
+    Toggle ClawOfCat;
+    [SerializeField]
+    Toggle WhiskerOfCat;
+    [SerializeField]
+    Toggle FurOfCat;
 
     List<string> ingredients = new List<string>();
     int counter = 0;
+    int mainCounter = 0;
 
     CatState catState;
 
@@ -22,15 +29,6 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Potion"))
-        {
-            AddIngredient(collision.gameObject.GetComponent<Ingredient>());
-            Destroy(collision.gameObject);
-        }
-    }
-
     public void AddIngredient(Ingredient ingredient)
     {
         if (counter == 3)
@@ -39,6 +37,28 @@ public class InventorySystem : MonoBehaviour
         itemImages[counter].gameObject.SetActive(true);
         ingredients.Add(ingredient.GetIngredientName());
         counter++;
+    }
+
+    public void AddMainIngredient(MainIngredient ingredient)
+    {
+        switch (ingredient.GetIngredientName())
+        {
+            default:
+            case "WhiskerOfCat":
+                WhiskerOfCat.isOn = true;
+                break;
+            case "ClawOfCat":
+                ClawOfCat.isOn = true;
+                break;
+            case "FurOfCat":
+                FurOfCat.isOn = true;
+                break;
+        }
+        mainCounter++;
+        if (mainCounter == 3)
+        {
+            //Win game
+        }
     }
 
     public void MakePotion()
