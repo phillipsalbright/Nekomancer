@@ -29,15 +29,6 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Potion"))
-        {
-            AddIngredient(collision.gameObject.GetComponent<Ingredient>());
-            Destroy(collision.gameObject);
-        }
-    }
-
     public void AddIngredient(Ingredient ingredient)
     {
         if (counter == 3)

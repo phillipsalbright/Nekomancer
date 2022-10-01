@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 5921202711039865665}
   m_Layer: 3
   m_Name: BasePlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -402,6 +402,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  ClawOfCat: {fileID: 0}
+  WhiskerOfCat: {fileID: 0}
+  FurOfCat: {fileID: 0}
 --- !u!1 &3304710980704704452
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,10 +7,10 @@ public class MainIngredient : Ingredient
 {
     public override void Pickup(CallbackContext ctx)
     {
-        if (ingredientPickup)
+        if (ingredientPickup && ctx.performed)
         {
             invSystem.AddIngredient(this);
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 }

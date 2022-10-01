@@ -16,19 +16,27 @@ public class Ingredient : MonoBehaviour
 
     protected void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             ingredientPickup = true;
-            invSystem = other.gameObject.GetComponent<InventorySystem>();
+            invSystem = other.GetComponentInParent<InventorySystem>();
+        }
+    }
+
+    protected void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            ingredientPickup = false;
         }
     }
 
     public virtual void Pickup(CallbackContext ctx)
     {
-        if (ingredientPickup)
+        if (ingredientPickup && ctx.performed)
         {
             invSystem.AddIngredient(this);
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 

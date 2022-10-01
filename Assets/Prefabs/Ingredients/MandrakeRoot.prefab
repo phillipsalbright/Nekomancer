@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 935cabe4c08dcac4d98be6280119d065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingSprite: {fileID: 0}
+  ingSprite: {fileID: 21300000, guid: 2781d6c3763f70342a17c82c2234e96e, type: 3}
   IngredientName: MandrakeRoot
 --- !u!114 &3372780296961199482
 MonoBehaviour:

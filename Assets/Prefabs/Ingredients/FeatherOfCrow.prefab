@@ -157,8 +157,7 @@ MonoBehaviour:
     m_ActionName: PlayerMove/MouseInput[/Mouse/delta,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1795265721755992549, guid: 4f3afa16476f96a4caacb7defd173299,
-          type: 3}
+      - m_Target: {fileID: 3564695595913062222}
         m_TargetAssemblyTypeName: Ingredient, Assembly-CSharp
         m_MethodName: Pickup
         m_Mode: 0

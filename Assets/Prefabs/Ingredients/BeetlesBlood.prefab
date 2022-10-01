@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 935cabe4c08dcac4d98be6280119d065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingSprite: {fileID: 0}
+  ingSprite: {fileID: 21300000, guid: 2781d6c3763f70342a17c82c2234e96e, type: 3}
   IngredientName: BeetlesBlood
 --- !u!114 &-8700858589839194033
 MonoBehaviour:
@@ -157,8 +157,7 @@ MonoBehaviour:
     m_ActionName: PlayerMove/MouseInput[/Mouse/delta,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1795265721755992549, guid: 4f3afa16476f96a4caacb7defd173299,
-          type: 3}
+      - m_Target: {fileID: 7520581014931495961}
         m_TargetAssemblyTypeName: Ingredient, Assembly-CSharp
         m_MethodName: Pickup
         m_Mode: 0
