@@ -156,6 +156,10 @@ MonoBehaviour:
     m_ActionId: aee146f2-fbcb-46a5-a3cd-0ed7c4e10d8c
     m_ActionName: PlayerMove/MouseInput[/Mouse/delta,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 96fc6f4a-8b37-40fd-8df0-99ee56dd3ae8
+    m_ActionName: PlayerMove/Zoomie[/Keyboard/leftShift]
+  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5850295468296101598}
         m_TargetAssemblyTypeName: Ingredient, Assembly-CSharp
@@ -169,7 +173,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 18607d4e-aba3-4722-9ef8-2315c062673b
+    m_ActionId: c0dbc302-87fd-4349-9cab-e8d984884370
     m_ActionName: PlayerMove/Interact[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 

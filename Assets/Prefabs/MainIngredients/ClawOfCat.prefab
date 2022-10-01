@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3015769524076042129}
   - component: {fileID: 3015769524076042128}
   - component: {fileID: -4830280463879851347}
+  - component: {fileID: -1660727159720961510}
   m_Layer: 0
   m_Name: ClawOfCat
   m_TagString: Untagged
@@ -112,3 +113,70 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingSprite: {fileID: 0}
   IngredientName: ClawOfCat
+--- !u!114 &-1660727159720961510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3015769524076042143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 0320bbd1c0e496c44af6612bf628947d,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 058be9fb-40f1-4f5e-a257-17d8d1075022
+    m_ActionName: PlayerMove/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 57fde069-a581-419c-8e91-b6e3bca61038
+    m_ActionName: PlayerMove/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eadc8e9b-598a-4970-a8e4-c250b34a87aa
+    m_ActionName: PlayerMove/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: aee146f2-fbcb-46a5-a3cd-0ed7c4e10d8c
+    m_ActionName: PlayerMove/MouseInput[/Mouse/delta,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 96fc6f4a-8b37-40fd-8df0-99ee56dd3ae8
+    m_ActionName: PlayerMove/Zoomie[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -4830280463879851347}
+        m_TargetAssemblyTypeName: MainIngredient, Assembly-CSharp
+        m_MethodName: Pickup
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c0dbc302-87fd-4349-9cab-e8d984884370
+    m_ActionName: PlayerMove/Interact[/Keyboard/e]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: PlayerMove
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
