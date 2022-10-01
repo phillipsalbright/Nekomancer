@@ -8,11 +8,14 @@ public class InventorySystem : MonoBehaviour
     [SerializeField]
     Image[] itemImages = new Image[3];
 
-    string ingredients = "";
+    List<string> ingredients = new List<string>();
     int counter = 0;
+
+    CatState catState;
 
     private void Start()
     {
+        catState = GetComponent<CatState>();
         foreach (Image itemImage in itemImages)
         {
             itemImage.gameObject.SetActive(false);
@@ -28,23 +31,27 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    void AddIngredient(Ingredient ingredient)
+    public void AddIngredient(Ingredient ingredient)
     {
+        if (counter == 3)
+            return;
         itemImages[counter].sprite = ingredient.GetSprite();
         itemImages[counter].gameObject.SetActive(true);
-        ingredients += ingredient.GetIngredientName();
+        ingredients.Add(ingredient.GetIngredientName());
         counter++;
-        if (counter == 3)
-        {
-            MakePotion();
-        }
     }
 
-    void MakePotion()
+    public void MakePotion()
     {
+        if (counter != 3)
+        {
+            return;
+        }
         for (int i = 0; i < itemImages.Length; i++)
         {
             itemImages[i].gameObject.SetActive(false);
         }
+        ingredients.Sort();
+        catState.ApplyPotion(string.Join(",", ingredients));
     }
 }
