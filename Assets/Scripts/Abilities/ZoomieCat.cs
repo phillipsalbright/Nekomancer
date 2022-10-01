@@ -17,6 +17,13 @@ public class ZoomieCat : PlayerMovement
     [Header("Settings")]
     [SerializeField] private float chargeTime = 1.5f;
 
+    private bool isPressed = false;
+
+    public bool IsZooming()
+    {
+        return activeZoomie;
+    }
+
     protected override void FixedUpdate()
     {
         // If charging, LERP the cat speed to max
@@ -26,13 +33,13 @@ public class ZoomieCat : PlayerMovement
         base.FixedUpdate();
         if (activeZoomie)
         {
-            playerRB.AddForce(moveDir * (newSpeed * speedMultiplier), ForceMode.Acceleration);
-
+            if (!(movementDirection.x == 0 && movementDirection.z == 0))
+                playerRB.AddForce(moveDir * (newSpeed * speedMultiplier), ForceMode.Acceleration);
         }
-        if (playerRB.velocity.magnitude <= .05)
+        /*if (playerRB.velocity.magnitude <= .05)
         {
             SpeedBoost(false);
-        }
+        }*/
     }
 
     void ChargeZoomie(bool state)
@@ -54,7 +61,8 @@ public class ZoomieCat : PlayerMovement
     IEnumerator ChangeCoroutine()
     {
         yield return new WaitForSeconds(chargeTime);
-        SpeedBoost(true);
+        if (isPressed)
+            SpeedBoost(true);
     }
 
     public void SpeedBoost(bool state)
@@ -87,11 +95,13 @@ public class ZoomieCat : PlayerMovement
         if (ctx.action.triggered)
         {
             ChargeZoomie(true);
+            isPressed = true;
         }
         else
         {
+            isPressed = false;
             if (activeZoomie)
-            {
+            { 
                 SpeedBoost(false);
             }
             
