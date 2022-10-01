@@ -5425,7 +5425,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0.5
-  m_AngularDrag: 1.02
+  m_AngularDrag: 2
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -5672,8 +5672,8 @@ MonoBehaviour:
   abilityState: 3
   activeClip: {fileID: 8300000, guid: 9bf17dd62bf9ea94fbd3460bee3d935c, type: 3}
   playerRB: {fileID: 3304710980469724914}
-  speed: 10
-  jumpForce: 10
+  speed: 15
+  jumpForce: 7
   turnSmoothTime: 0.1
   dragVal: 2
   moveDir: {x: 0, y: 0, z: 0}
