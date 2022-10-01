@@ -5,21 +5,29 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class PotionPot : MonoBehaviour
 {
-    bool ingredientPickup = false;
+    bool potionCraft = false;
     InventorySystem invSystem;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            ingredientPickup = true;
-            invSystem = other.gameObject.GetComponent<InventorySystem>();
+            potionCraft = true;
+            invSystem = other.gameObject.GetComponentInParent<InventorySystem>();
+        }
+    }
+
+    protected void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            potionCraft = false;
         }
     }
 
     public void Craft(CallbackContext ctx)
     {
-        if (ingredientPickup)
+        if (potionCraft && ctx.performed)
         {
             invSystem.MakePotion();
         }

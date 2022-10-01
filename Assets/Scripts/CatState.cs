@@ -43,6 +43,6 @@ public class CatState : MonoBehaviour
 
     void SetObjEnabled(bool setEnabled)
     {
-        abilityDictionary[currentState].gameObject.SetActive(setEnabled);
+        abilityDictionary[currentState].enabled = setEnabled;
     }
 }

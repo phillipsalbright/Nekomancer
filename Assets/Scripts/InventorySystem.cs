@@ -71,6 +71,7 @@ public class InventorySystem : MonoBehaviour
         {
             itemImages[i].gameObject.SetActive(false);
         }
+        counter = 0;
         ingredients.Sort();
         catState.ApplyPotion(string.Join(",", ingredients));
     }

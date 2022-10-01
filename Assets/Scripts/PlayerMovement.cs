@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : Ability
 {
     protected Vector2 movementInput = new Vector2(0, 0);
     protected Vector3 movementDirection;
@@ -25,6 +25,12 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         playerRB.drag = dragVal;
+        visuals.SetActive(true);
+    }
+
+    private void OnDisable()
+    {
+        visuals.SetActive(false);
     }
 
     public virtual void OnMouse(InputAction.CallbackContext ctx)
