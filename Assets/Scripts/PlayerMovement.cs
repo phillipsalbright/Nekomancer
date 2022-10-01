@@ -17,6 +17,7 @@ public class PlayerMovement : Ability
     float turnSmoothVelocity;
     [SerializeField] private Transform cam;
     [SerializeField] protected GameObject visuals;
+    [SerializeField] protected Animator anim;
     public virtual void OnMove(InputAction.CallbackContext ctx)
     {
         movementInput = ctx.ReadValue<Vector2>().normalized;
@@ -56,7 +57,10 @@ public class PlayerMovement : Ability
 
         if (movementDirection.magnitude > .05)
         {
-
+            if (anim)
+            {
+                anim.SetBool("Walking", true);
+            }
             float targetAngle = Mathf.Atan2(movementDirection.x, movementDirection.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
@@ -73,6 +77,10 @@ public class PlayerMovement : Ability
         } else
         {
             FindObjectOfType<CinemachineFreeLook>().m_RecenterToTargetHeading.m_enabled = false;
+            if (anim)
+            {
+                anim.SetBool("Walking", false);
+            }
         }
         
         if (Physics.Raycast(this.transform.position, new Vector3(0, -1f, 0), 1.1f) && jumpPressed) {
