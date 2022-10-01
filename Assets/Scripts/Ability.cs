@@ -5,15 +5,20 @@ using UnityEngine;
 public class Ability : MonoBehaviour
 {
     [SerializeField]
-    List<Ingredient> ingredients = new List<Ingredient>();
+    protected List<Ingredient> ingredients = new List<Ingredient>();
 
     [SerializeField]
-    CatState.States abilityState;
+    protected CatState.States abilityState;
 
     public string GetStringRep()
     {
-        ingredients.Sort();
-        return string.Join(",", ingredients);
+        List<string> ingredientNames = new List<string>();
+        foreach (Ingredient ingredient in ingredients)
+        {
+            ingredientNames.Add(ingredient.GetIngredientName());
+        }
+        ingredientNames.Sort();
+        return string.Join(",", ingredientNames);
     }
 
     public CatState.States GetState()
