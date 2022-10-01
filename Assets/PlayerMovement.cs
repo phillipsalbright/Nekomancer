@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 movementInput = new Vector2(0, 0);
     private Vector2 mouseInput = new Vector2(0, 0);
     protected bool jumpPressed = false;
-    [SerializeField] private Rigidbody playerRB;
+    [SerializeField] protected Rigidbody playerRB;
     [SerializeField] private float speed = 10f;
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private float turnSmoothTime = .1f;
