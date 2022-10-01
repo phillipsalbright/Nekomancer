@@ -5,33 +5,38 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class Ingredient : MonoBehaviour
 {
+
     [SerializeField]
-    private Sprite ingSprite;
+    protected Sprite ingSprite;
     [SerializeField]
-    private string IngredientName;
+    protected string IngredientName;
 
-    bool ingredientPickup = false;
-    InventorySystem invSystem;
+    protected bool ingredientPickup = false;
+    protected InventorySystem invSystem;
 
-    private void Start()
+    protected void OnTriggerEnter(Collider other)
     {
-        //controls interact Pickup
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             ingredientPickup = true;
-            invSystem = other.gameObject.GetComponent<InventorySystem>();
+            invSystem = other.GetComponentInParent<InventorySystem>();
         }
     }
 
-    void Pickup(CallbackContext ctx)
+    protected void OnTriggerExit(Collider other)
     {
-        if (ingredientPickup)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            ingredientPickup = false;
+        }
+    }
+
+    public virtual void Pickup(CallbackContext ctx)
+    {
+        if (ingredientPickup && ctx.performed)
         {
             invSystem.AddIngredient(this);
+            Destroy(gameObject);
         }
     }
 
