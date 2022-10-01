@@ -1,21 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.InputSystem;
 using UnityEngine;
 
 public class RollyCat : PlayerMovement
 {
-    [SerializeField]
-    private GameObject catVisuals;
+    public float rotateAmt = 2f;
 
-    // Start is called before the first frame update
-    void Start()
+    public override void OnMove(InputAction.CallbackContext ctx)
     {
-        
+        base.OnMove(ctx);
     }
 
     // Update is called once per frame
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
+
+        Vector3 movementDirection = new Vector3(movementInput.x, 0, movementInput.y);
+
+        if (movementDirection.magnitude > .05)
+        {
+            visuals.transform.Rotate(transform.right, rotateAmt);
+        }
     }
 }
