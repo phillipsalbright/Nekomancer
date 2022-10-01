@@ -3,19 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
-public class Ingredient : MonoBehaviour
+public class PotionPot : MonoBehaviour
 {
-    [SerializeField]
-    private Sprite ingSprite;
-    [SerializeField]
-    private string IngredientName;
-
     bool ingredientPickup = false;
     InventorySystem invSystem;
 
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
-        //controls interact Pickup
+        //set up controller interact
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,21 +23,11 @@ public class Ingredient : MonoBehaviour
         }
     }
 
-    void Pickup(CallbackContext ctx)
+    void Craft(CallbackContext ctx)
     {
         if (ingredientPickup)
         {
-            invSystem.AddIngredient(this);
+            invSystem.MakePotion();
         }
-    }
-
-    public Sprite GetSprite()
-    {
-        return ingSprite;
-    }
-
-    public string GetIngredientName()
-    {
-        return IngredientName;
     }
 }
