@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         Vector3 movementDirection = new Vector3(movementInput.x, 0, movementInput.y);
 
