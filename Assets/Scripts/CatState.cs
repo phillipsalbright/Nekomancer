@@ -19,7 +19,7 @@ public class CatState : MonoBehaviour
 
     private void Start()
     {
-        foreach(Ability ability in GetComponents<Ability>())
+        foreach(Ability ability in GetComponentsInChildren<Ability>())
         {
             stateDictionary.Add(ability.GetStringRep(), ability.GetState());
             abilityDictionary.Add(ability.GetState(), ability);
@@ -36,14 +36,13 @@ public class CatState : MonoBehaviour
 
     void SetState(States newState)
     {
-        SetScriptEnabled(false);
+        SetObjEnabled(false);
         currentState = newState;
-        SetScriptEnabled(true);
+        SetObjEnabled(true);
     }
 
-    void SetScriptEnabled(bool setEnabled)
+    void SetObjEnabled(bool setEnabled)
     {
-        if (abilityDictionary.ContainsKey(currentState))
-            abilityDictionary[currentState].enabled = setEnabled;
+        abilityDictionary[currentState].gameObject.SetActive(enabled);
     }
 }

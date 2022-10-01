@@ -5,6 +5,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class Ingredient : MonoBehaviour
 {
+
     [SerializeField]
     private Sprite ingSprite;
     [SerializeField]
