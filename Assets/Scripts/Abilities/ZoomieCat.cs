@@ -18,10 +18,16 @@ public class ZoomieCat : PlayerMovement
     [SerializeField] private float chargeTime = 1.5f;
 
     private bool isPressed = false;
+    private bool inTrigger = false;
 
     public bool IsZooming()
     {
         return activeZoomie;
+    }
+
+    public bool IsInTrigger()
+    {
+        return inTrigger;
     }
 
     protected override void FixedUpdate()
@@ -85,6 +91,22 @@ public class ZoomieCat : PlayerMovement
         foreach (var boot in boots)
         {
             boot.SetActive(state);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Trigger")
+        {
+            inTrigger = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Trigger")
+        {
+            inTrigger = false;
         }
     }
 
