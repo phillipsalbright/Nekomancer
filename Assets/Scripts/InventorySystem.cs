@@ -55,14 +55,15 @@ public class InventorySystem : MonoBehaviour
                 break;
         }
         mainCounter++;
-        if (mainCounter == 3)
-        {
-            //Win game
-        }
     }
 
     public void MakePotion()
     {
+        if (mainCounter == 3)
+        {
+            catState.FinalState();
+            return;
+        }
         if (counter != 3)
         {
             return;
