@@ -18,10 +18,16 @@ public class ZoomieCat : PlayerMovement
     [SerializeField] private float chargeTime = 1.5f;
 
     private bool isPressed = false;
+    private bool inTrigger = false;
 
     public bool IsZooming()
     {
         return activeZoomie;
+    }
+
+    public bool IsInTrigger()
+    {
+        return inTrigger;
     }
 
     protected override void FixedUpdate()
@@ -36,10 +42,10 @@ public class ZoomieCat : PlayerMovement
             if (!(movementDirection.x == 0 && movementDirection.z == 0))
                 playerRB.AddForce(moveDir * (newSpeed * speedMultiplier), ForceMode.Acceleration);
         }
-        /*if (playerRB.velocity.magnitude <= .05)
+        else if (audioManager.isPlaying && !chargingZoomie)
         {
-            SpeedBoost(false);
-        }*/
+            audioManager.Stop();
+        }
     }
 
     void ChargeZoomie(bool state)
@@ -54,15 +60,18 @@ public class ZoomieCat : PlayerMovement
         {
             StopCoroutine(speedCharge);
         }
-
-        
     }
 
     IEnumerator ChangeCoroutine()
     {
+        chargingZoomie = true;
+        audioManager.clip = activeClip;
+        audioManager.loop = true;
+        audioManager.Play();
         yield return new WaitForSeconds(chargeTime);
         if (isPressed)
             SpeedBoost(true);
+        chargingZoomie = false;
     }
 
     public void SpeedBoost(bool state)
@@ -85,6 +94,22 @@ public class ZoomieCat : PlayerMovement
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Trigger")
+        {
+            inTrigger = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Trigger")
+        {
+            inTrigger = false;
+        }
+    }
+
     //All Inputs
     #region Input
 
@@ -99,9 +124,11 @@ public class ZoomieCat : PlayerMovement
         }
         else
         {
-            isPressed = false;
+            isPressed = false; 
+            audioManager.Stop();
+
             if (activeZoomie)
-            { 
+            {
                 SpeedBoost(false);
             }
             

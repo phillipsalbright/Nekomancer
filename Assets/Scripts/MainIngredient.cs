@@ -9,7 +9,7 @@ public class MainIngredient : Ingredient
     {
         if (ingredientPickup && ctx.performed)
         {
-            invSystem.AddIngredient(this);
+            invSystem.AddMainIngredient(this);
             Destroy(gameObject);
         }
     }

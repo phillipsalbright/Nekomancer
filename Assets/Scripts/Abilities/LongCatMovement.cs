@@ -7,6 +7,8 @@ public class LongCatMovement : PlayerMovement
     [SerializeField] CapsuleCollider cc;
     [SerializeField] GameObject capsule;
     [SerializeField] GameObject paws;
+
+    bool extending = false;
     protected override void FixedUpdate()
     {
         bool jumpPressedLocal = jumpPressed;
@@ -15,6 +17,13 @@ public class LongCatMovement : PlayerMovement
         jumpPressed = jumpPressedLocal;
         if (jumpPressed)
         {
+            if (!extending)
+            {
+                audioManager.clip = activeClip;
+                audioManager.loop = true;
+                audioManager.Play();
+                extending = true;
+            }
             if (cc.height < 8)
             {
                 cc.height += .1f;
@@ -23,6 +32,11 @@ public class LongCatMovement : PlayerMovement
             }
         } else
         {
+            if (extending)
+            {
+                audioManager.Stop();
+                extending = false;
+            }
             if (cc.height > 2)
             {
                 Vector3 newPos = new Vector3(cc.transform.localPosition.x, cc.transform.localPosition.y + cc.height / 2, cc.transform.localPosition.z);

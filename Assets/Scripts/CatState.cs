@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CatState : MonoBehaviour
 {
@@ -17,8 +18,18 @@ public class CatState : MonoBehaviour
 
     Dictionary<States, Ability> abilityDictionary = new Dictionary<States, Ability>();
 
+    public GameObject finalForm;
+
+    AudioSource audioManager;
+
+    [SerializeField] ParticleSystem transformation;
+
+    [SerializeField]
+    AudioClip switchSound;
+
     private void Start()
     {
+        audioManager = GetComponent<AudioSource>();
         foreach(Ability ability in GetComponentsInChildren<Ability>())
         {
             stateDictionary.Add(ability.GetStringRep(), ability.GetState());
@@ -32,10 +43,31 @@ public class CatState : MonoBehaviour
             SetState(stateDictionary[potion]);
         else
             SetState(States.Zombie);
+
+
+        transformation.Play();
+    }
+
+    public void FinalState()
+    {
+        SetObjEnabled(false);
+        finalForm.SetActive(true);
+        StartCoroutine("EndGame");
+    }
+
+    IEnumerator EndGame()
+    {
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene(2);
     }
 
     void SetState(States newState)
     {
+        if (newState == currentState)
+            return;
+        audioManager.clip = switchSound;
+        audioManager.loop = false;
+        audioManager.Play();
         SetObjEnabled(false);
         currentState = newState;
         SetObjEnabled(true);
