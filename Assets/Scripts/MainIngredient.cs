@@ -10,7 +10,7 @@ public class MainIngredient : Ingredient
         if (ingredientPickup && ctx.performed)
         {
             invSystem.AddMainIngredient(this);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
