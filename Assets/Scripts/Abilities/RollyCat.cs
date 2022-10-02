@@ -36,6 +36,10 @@ public class RollyCat : PlayerMovement
             CollectItem();
             other.gameObject.SetActive(false);
         }
+        else if (other.CompareTag("Chain"))
+        {
+            other.gameObject.GetComponent<Chain>().PullChain();
+        }
     }
 
     public void OnCollisionEnter(Collision collision)
