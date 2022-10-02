@@ -17,7 +17,7 @@ public class Ingredient : MonoBehaviour
 
     public GameObject relObj;
 
-    public PotionPot potionPot;
+    public PotionPot[] potionPots = new PotionPot[4];
 
     private HintBillboard hint;
 
@@ -28,9 +28,12 @@ public class Ingredient : MonoBehaviour
             ingredientPickup = true;
             invSystem = other.GetComponentInParent<InventorySystem>();
 
-            hint.SetText("to collect " + IngredientName);
-            hint.gameObject.SetActive(true);
-            hint.SetPosition(transform.position);
+            if (invSystem.counter < 3)
+            {
+                hint.SetText("to collect " + IngredientName);
+                hint.gameObject.SetActive(true);
+                hint.SetPosition(transform.position);
+            }
         }
     }
 
@@ -48,15 +51,17 @@ public class Ingredient : MonoBehaviour
     {
         if (ingredientPickup && ctx.performed)
         {
-            invSystem.AddIngredient(this);
-            if (relObj != null)
+            if (invSystem.AddIngredient(this))
             {
-                relObj.GetComponent<Ingredient>().isLockedIngredient = false;
-                relObj.GetComponent<Ingredient>().Respawn();
+                if (relObj != null)
+                {
+                    relObj.GetComponent<Ingredient>().isLockedIngredient = false;
+                    relObj.GetComponent<Ingredient>().Respawn();
+                }
+                gameObject.SetActive(false);
+                ingredientPickup = false;
+                hint.gameObject.SetActive(false);
             }
-            gameObject.SetActive(false);
-            ingredientPickup = false;
-            hint.gameObject.SetActive(false);
         }
     }
 
@@ -85,16 +90,16 @@ public class Ingredient : MonoBehaviour
 
     private void Awake()
     {
-        if (potionPot == null)
-        {
-            potionPot = FindObjectOfType<PotionPot>();
-        }
+        potionPots = FindObjectsOfType<PotionPot>();
 
         if (hint == null)
         {
             hint = FindObjectOfType<HintBillboard>();
         }
 
-        potionPot.PotUsedEvent += OnPotUsed;
+        foreach (PotionPot cauldron in potionPots)
+        {
+            cauldron.PotUsedEvent += OnPotUsed;
+        }
     }
 }
