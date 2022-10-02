@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using static UnityEngine.InputSystem.InputAction;
 
 public class PotionPot : MonoBehaviour
 {
+    public delegate void PotUsed();
+    public event PotUsed PotUsedEvent;
+
     bool potionCraft = false;
     InventorySystem invSystem;
 
@@ -30,6 +34,8 @@ public class PotionPot : MonoBehaviour
         if (potionCraft && ctx.performed)
         {
             invSystem.MakePotion();
+
+            PotUsedEvent.Invoke();
         }
     }
 }
