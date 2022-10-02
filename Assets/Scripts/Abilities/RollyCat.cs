@@ -86,6 +86,11 @@ public class RollyCat : PlayerMovement
         base.OnJump(ctx);
     }
 
+    public override void OnMouse(InputAction.CallbackContext ctx)
+    {
+        base.OnMouse(ctx);
+    }
+
     private void CollectItem()
     {
         collectedObject = true;
