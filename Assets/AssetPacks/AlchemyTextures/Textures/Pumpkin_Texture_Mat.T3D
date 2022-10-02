@@ -1,0 +1,38 @@
+Begin Object Class=/Script/Engine.Material Name="Pumpkin_Texture_Mat"
+   Begin Object Class=/Script/Engine.MaterialExpressionTextureSample Name="MaterialExpressionTextureSample_5"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionTextureSample Name="MaterialExpressionTextureSample_6"
+   End Object
+   Begin Object Class=/Script/UnrealEd.SceneThumbnailInfoWithPrimitive Name="SceneThumbnailInfoWithPrimitive_4"
+   End Object
+   Begin Object Name="MaterialExpressionTextureSample_5"
+      Texture=Texture2D'"/Game/AlchemistsHouse/Assets/Textures/Pumpkin_Texture.Pumpkin_Texture"'
+      MaterialExpressionEditorX=-304
+      MaterialExpressionGuid=E29CF43049CD1D17FA46CAB1A8A87112
+      Material=Material'"Pumpkin_Texture_Mat"'
+   End Object
+   Begin Object Name="MaterialExpressionTextureSample_6"
+      Texture=Texture2D'"/Game/AlchemistsHouse/Assets/Textures/Pumpkin_normal.Pumpkin_normal"'
+      SamplerType=SAMPLERTYPE_Normal
+      MaterialExpressionEditorX=-304
+      MaterialExpressionEditorY=176
+      MaterialExpressionGuid=1C8951164A3FEC813DEE62BA7C694F18
+      Material=Material'"Pumpkin_Texture_Mat"'
+   End Object
+   Begin Object Name="SceneThumbnailInfoWithPrimitive_4"
+   End Object
+   BaseColor=(Expression=MaterialExpressionTextureSample'"MaterialExpressionTextureSample_5"')
+   Specular=(Expression=MaterialExpressionTextureSample'"MaterialExpressionTextureSample_5"',Mask=1,MaskR=1,MaskG=1,MaskB=1)
+   Roughness=(Expression=MaterialExpressionTextureSample'"MaterialExpressionTextureSample_5"',OutputIndex=4,Mask=1,MaskA=1)
+   Normal=(Expression=MaterialExpressionTextureSample'"MaterialExpressionTextureSample_6"',Mask=1,MaskR=1,MaskG=1,MaskB=1)
+   bUsedWithStaticLighting=True
+   Expressions(0)=MaterialExpressionTextureSample'"MaterialExpressionTextureSample_5"'
+   Expressions(1)=MaterialExpressionTextureSample'"MaterialExpressionTextureSample_6"'
+   bCanMaskedBeAssumedOpaque=True
+   StateId=4E828D46474AB4D66D44089F7863E09A
+   CachedExpressionData=(ReferencedTextures=(Texture2D'"/Game/AlchemistsHouse/Assets/Textures/Pumpkin_Texture.Pumpkin_Texture"',Texture2D'"/Game/AlchemistsHouse/Assets/Textures/Pumpkin_normal.Pumpkin_normal"'),QualityLevelsUsed=(False,False,False,False))
+   ReferencedTextureGuids(0)=5925D07F49FE6BFEF9B5209DB2BF7517
+   ReferencedTextureGuids(1)=B1DF1ABC455B19B318028E820A847BA5
+   ThumbnailInfo=SceneThumbnailInfoWithPrimitive'"SceneThumbnailInfoWithPrimitive_4"'
+   LightingGuid=36C3D71C413935FEBB8A6B8960E43F84
+End Object
