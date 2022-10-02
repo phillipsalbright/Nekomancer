@@ -6,7 +6,6 @@ using System.Collections;
 public class ZoomieCat : PlayerMovement
 {
     private Coroutine speedCharge;
-    [SerializeField] GameObject[] boots;
     [SerializeField] private float speedMultiplier = 2f;
     [SerializeField] protected float newSpeed = 100f;
 
@@ -33,18 +32,26 @@ public class ZoomieCat : PlayerMovement
     protected override void FixedUpdate()
     {
         // If charging, LERP the cat speed to max
-        // If activeZoomie, multiply the cat speed
+        // If activeZoomie, multiply the cat spee
 
         //float speed = movementSpeed * (activeZoomie ? 2 : 1);
         base.FixedUpdate();
         if (activeZoomie)
         {
+            anim.speed = 1;
             if (!(movementDirection.x == 0 && movementDirection.z == 0))
                 playerRB.AddForce(moveDir * (newSpeed * speedMultiplier), ForceMode.Acceleration);
         }
         else if (audioManager.isPlaying && !chargingZoomie)
         {
             audioManager.Stop();
+        }
+        if (!activeZoomie && anim.GetBool("Walking")) {
+            anim.speed = .1f;
+        }
+        if (!anim.GetBool("Walking"))
+        {
+            anim.speed = 1f;
         }
     }
 
@@ -81,17 +88,9 @@ public class ZoomieCat : PlayerMovement
         if (state)
         {
             //Debug.Log("Zoomie");
+            
         }
-        else
-        {
 
-            //Debug.Log("No Zoomie");
-        }
-       
-        foreach (var boot in boots)
-        {
-            boot.SetActive(state);
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -115,6 +114,10 @@ public class ZoomieCat : PlayerMovement
 
     public void OnZoomie(InputAction.CallbackContext ctx)
     {
+        if (!this.enabled)
+        {
+            return;
+        }
         //  && movementInput.x != 0 Check if movement direction is not 0
         //  !chargingZoomie && !activeZoomie &&  && movementDirection.magnitude > .05
         if (ctx.action.triggered)
