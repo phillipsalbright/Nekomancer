@@ -36,7 +36,6 @@ public class RollyCat : PlayerMovement
     {
         if (!this.enabled)
         {
-            Debug.Log("NOT ACTIVE");
             return;
         }
 
@@ -55,7 +54,6 @@ public class RollyCat : PlayerMovement
     {
         if (!this.enabled)
         {
-            Debug.Log("NOT ACTIVE");
             return;
         }
 
@@ -69,7 +67,6 @@ public class RollyCat : PlayerMovement
     {
         if (!this.enabled)
         {
-            Debug.Log("NOT ACTIVE");
             return;
         }
 

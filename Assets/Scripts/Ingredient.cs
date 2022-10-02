@@ -18,12 +18,17 @@ public class Ingredient : MonoBehaviour
 
     public PotionPot potionPot;
 
+    private HintBillboard hint;
+
     protected void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             ingredientPickup = true;
             invSystem = other.GetComponentInParent<InventorySystem>();
+
+            hint.gameObject.SetActive(true);
+            hint.SetPosition(transform.position);
         }
     }
 
@@ -32,6 +37,8 @@ public class Ingredient : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             ingredientPickup = false;
+
+            hint.gameObject.SetActive(false);
         }
     }
 
@@ -46,6 +53,7 @@ public class Ingredient : MonoBehaviour
             }
             gameObject.SetActive(false);
             ingredientPickup = false;
+            hint.gameObject.SetActive(false);
         }
     }
 
@@ -74,6 +82,11 @@ public class Ingredient : MonoBehaviour
         if (potionPot == null)
         {
             potionPot = FindObjectOfType<PotionPot>();
+        }
+
+        if (hint == null)
+        {
+            hint = FindObjectOfType<HintBillboard>();
         }
 
         potionPot.PotUsedEvent += OnPotUsed;
