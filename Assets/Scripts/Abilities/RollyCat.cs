@@ -12,7 +12,8 @@ public class RollyCat : PlayerMovement
     private const int CLINGABLE_LAYER = 7;
 
     private Vector3 gravityDirection = Vector3.down;
-    private bool collectedObject;
+    [HideInInspector]
+    public bool collectedObject;
 
     protected override void OnEnable()
     {
@@ -33,6 +34,12 @@ public class RollyCat : PlayerMovement
 
     public void OnTriggerEnter(Collider other)
     {
+        if (!this.enabled)
+        {
+            Debug.Log("NOT ACTIVE");
+            return;
+        }
+
         if (other.CompareTag("Collectible"))
         {
             CollectItem();
@@ -46,6 +53,12 @@ public class RollyCat : PlayerMovement
 
     public void OnCollisionEnter(Collision collision)
     {
+        if (!this.enabled)
+        {
+            Debug.Log("NOT ACTIVE");
+            return;
+        }
+
         if (collision.collider.gameObject.layer == CLINGABLE_LAYER)
         {
             gravityDirection = -collision.impulse.normalized;
@@ -54,6 +67,12 @@ public class RollyCat : PlayerMovement
 
     public void OnCollisionExit(Collision collision)
     {
+        if (!this.enabled)
+        {
+            Debug.Log("NOT ACTIVE");
+            return;
+        }
+
         if (collision.collider.gameObject.layer == CLINGABLE_LAYER)
         {
             gravityDirection = Vector3.down;
@@ -76,7 +95,7 @@ public class RollyCat : PlayerMovement
         key.SetActive(true);
     }
 
-    private void RemoveItem()
+    public void RemoveItem()
     {
         collectedObject = false;
         key.SetActive(false);
