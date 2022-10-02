@@ -5,6 +5,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class Ingredient : MonoBehaviour
 {
+    public bool isLockedIngredient;
 
     [SerializeField]
     protected Sprite ingSprite;
@@ -50,7 +51,8 @@ public class Ingredient : MonoBehaviour
             invSystem.AddIngredient(this);
             if (relObj != null)
             {
-                relObj.SetActive(true);
+                relObj.GetComponent<Ingredient>().isLockedIngredient = false;
+                relObj.GetComponent<Ingredient>().Respawn();
             }
             gameObject.SetActive(false);
             ingredientPickup = false;
@@ -60,7 +62,10 @@ public class Ingredient : MonoBehaviour
 
     public void Respawn()
     {
-        gameObject.SetActive(true);
+        if (!isLockedIngredient)
+        {
+            gameObject.SetActive(true);
+        }
     }
 
     public Sprite GetSprite()
