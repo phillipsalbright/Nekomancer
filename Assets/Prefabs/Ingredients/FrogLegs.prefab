@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 935cabe4c08dcac4d98be6280119d065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingSprite: {fileID: 0}
+  ingSprite: {fileID: 21300000, guid: 07c7099039ac13b47bb432925af7885e, type: 3}
   IngredientName: FrogLegs
   relObj: {fileID: 0}
   potionPot: {fileID: 0}
