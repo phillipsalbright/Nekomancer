@@ -9,9 +9,11 @@ public class HintBillboard : MonoBehaviour
     public TMP_Text textComponent;
     public Vector3 offset;
 
+    public string defaultTxt = "'E' or 'Gamepad_Left'\n";
+
     public void SetText(string newText)
     {
-        textComponent.text = newText;
+        textComponent.text = defaultTxt + newText;
     }
 
     public void SetPosition(Vector3 position)
@@ -22,6 +24,11 @@ public class HintBillboard : MonoBehaviour
     private void FixedUpdate()
     {
         transform.LookAt(player.transform, Vector3.up);
+    }
+
+    private void Start()
+    {
+        gameObject.SetActive(false);
     }
 
 }

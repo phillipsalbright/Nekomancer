@@ -31,6 +31,7 @@ public class Lock : MonoBehaviour
 
             if (rollyCat.collectedObject)
             {
+                hint.SetText("to open lock");
                 hint.gameObject.SetActive(true);
                 hint.SetPosition(transform.position);
             }
@@ -59,7 +60,7 @@ public class Lock : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         if (hint == null)
         {

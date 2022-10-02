@@ -21,6 +21,7 @@ public class PotionPot : MonoBehaviour
             potionCraft = true;
             invSystem = other.gameObject.GetComponentInParent<InventorySystem>();
 
+            hint.SetText("to mix ingredients");
             hint.gameObject.SetActive(true);
             hint.SetPosition(transform.position);
         }
@@ -47,7 +48,7 @@ public class PotionPot : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         if (hint == null)
         {

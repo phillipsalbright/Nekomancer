@@ -27,6 +27,7 @@ public class Ingredient : MonoBehaviour
             ingredientPickup = true;
             invSystem = other.GetComponentInParent<InventorySystem>();
 
+            hint.SetText("to collect " + IngredientName);
             hint.gameObject.SetActive(true);
             hint.SetPosition(transform.position);
         }
@@ -77,7 +78,7 @@ public class Ingredient : MonoBehaviour
         Respawn();
     }
 
-    private void Start()
+    private void Awake()
     {
         if (potionPot == null)
         {
