@@ -134,10 +134,19 @@ public class RollyCat : PlayerMovement
             playerRB.AddForce(normalOfPlane * jumpForce, ForceMode.Impulse);
         }
 
+
+
         //Vector3 movementDirection = new Vector3(movementInput.x, 0, movementInput.y);
         //if (movementDirection.magnitude > .05)
         //{
         //    visuals.transform.Rotate(transform.right, rotateAmt);
         //}
+
+        float r = 0.5f;
+        float rollSpeed = 3;
+
+        Vector3 moveDelta = new Vector3(movementDirection.x * rollSpeed * Time.deltaTime, movementDirection.z * rollSpeed * Time.deltaTime, 0);
+        Vector3 rotationAxis = Vector3.Cross(moveDelta.normalized, transform.forward);
+        visuals.transform.RotateAround(visuals.transform.position, rotationAxis, Mathf.Sin(moveDelta.magnitude * r * 2 * Mathf.PI)  *Mathf.Rad2Deg);
     }
 }

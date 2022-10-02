@@ -5455,7 +5455,7 @@ MonoBehaviour:
   abilityState: 3
   activeClip: {fileID: 8300000, guid: 9bf17dd62bf9ea94fbd3460bee3d935c, type: 3}
   playerRB: {fileID: 3304710980469724914}
-  speed: 25
+  speed: 45
   jumpForce: 20
   turnSmoothTime: 0.1
   dragVal: 3
