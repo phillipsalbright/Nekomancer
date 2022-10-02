@@ -11,9 +11,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/PhillipsScene.unity
     guid: f3470543a2221f748a85824834add5a7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/FinalScene.unity
     guid: c9588e00317fb6c429da1bc6f83b6278
+  - enabled: 1
+    path: Assets/Scenes/Witch'sHouse 1.unity
+    guid: 277bf11a7c0918d43889ce8b28cc7094
   - enabled: 1
     path: Assets/Scenes/EndScene.unity
     guid: b2ac16d31365e194aba1b21c9a1016c1

@@ -12,12 +12,18 @@ public class PotionPot : MonoBehaviour
     bool potionCraft = false;
     InventorySystem invSystem;
 
+    private HintBillboard hint;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             potionCraft = true;
             invSystem = other.gameObject.GetComponentInParent<InventorySystem>();
+
+            hint.SetText("to mix ingredients");
+            hint.gameObject.SetActive(true);
+            hint.SetPosition(transform.position);
         }
     }
 
@@ -26,6 +32,8 @@ public class PotionPot : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             potionCraft = false;
+
+            hint.gameObject.SetActive(false);
         }
     }
 
@@ -34,8 +42,17 @@ public class PotionPot : MonoBehaviour
         if (potionCraft && ctx.performed)
         {
             invSystem.MakePotion();
+            hint.gameObject.SetActive(false);
 
             PotUsedEvent.Invoke();
+        }
+    }
+
+    private void Awake()
+    {
+        if (hint == null)
+        {
+            hint = FindObjectOfType<HintBillboard>();
         }
     }
 }

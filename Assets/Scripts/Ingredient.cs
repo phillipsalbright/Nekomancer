@@ -5,6 +5,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class Ingredient : MonoBehaviour
 {
+    public bool isLockedIngredient;
 
     [SerializeField]
     protected Sprite ingSprite;
@@ -16,7 +17,9 @@ public class Ingredient : MonoBehaviour
 
     public GameObject relObj;
 
-    public PotionPot potionPot;
+    public PotionPot[] potionPots = new PotionPot[4];
+
+    private HintBillboard hint;
 
     protected void OnTriggerEnter(Collider other)
     {
@@ -24,6 +27,13 @@ public class Ingredient : MonoBehaviour
         {
             ingredientPickup = true;
             invSystem = other.GetComponentInParent<InventorySystem>();
+
+            if (invSystem.counter < 3)
+            {
+                hint.SetText("to collect " + IngredientName);
+                hint.gameObject.SetActive(true);
+                hint.SetPosition(transform.position);
+            }
         }
     }
 
@@ -32,6 +42,8 @@ public class Ingredient : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             ingredientPickup = false;
+
+            hint.gameObject.SetActive(false);
         }
     }
 
@@ -39,19 +51,26 @@ public class Ingredient : MonoBehaviour
     {
         if (ingredientPickup && ctx.performed)
         {
-            invSystem.AddIngredient(this);
-            if (relObj != null)
+            if (invSystem.AddIngredient(this))
             {
-                relObj.SetActive(true);
+                if (relObj != null)
+                {
+                    relObj.GetComponent<Ingredient>().isLockedIngredient = false;
+                    relObj.GetComponent<Ingredient>().Respawn();
+                }
+                gameObject.SetActive(false);
+                ingredientPickup = false;
+                hint.gameObject.SetActive(false);
             }
-            gameObject.SetActive(false);
-            ingredientPickup = false;
         }
     }
 
     public void Respawn()
     {
-        gameObject.SetActive(true);
+        if (!isLockedIngredient)
+        {
+            gameObject.SetActive(true);
+        }
     }
 
     public Sprite GetSprite()
@@ -69,13 +88,18 @@ public class Ingredient : MonoBehaviour
         Respawn();
     }
 
-    private void Start()
+    private void Awake()
     {
-        if (potionPot == null)
+        potionPots = FindObjectsOfType<PotionPot>();
+
+        if (hint == null)
         {
-            potionPot = FindObjectOfType<PotionPot>();
+            hint = FindObjectOfType<HintBillboard>();
         }
 
-        potionPot.PotUsedEvent += OnPotUsed;
+        foreach (PotionPot cauldron in potionPots)
+        {
+            cauldron.PotUsedEvent += OnPotUsed;
+        }
     }
 }

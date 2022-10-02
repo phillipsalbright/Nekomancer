@@ -11,6 +11,8 @@ public class Lock : MonoBehaviour
     bool canAttempt;
     RollyCat rollyCat;
 
+    private HintBillboard hint;
+
     private void Unlock()
     {
         // ADD OTHER UNLOCK FUNCTIONALITY HERE
@@ -26,6 +28,13 @@ public class Lock : MonoBehaviour
         {
             canAttempt = true;
             rollyCat = other.gameObject.GetComponentInParent<RollyCat>();
+
+            if (rollyCat.collectedObject)
+            {
+                hint.SetText("to open lock");
+                hint.gameObject.SetActive(true);
+                hint.SetPosition(transform.position);
+            }
         }
     }
 
@@ -34,6 +43,8 @@ public class Lock : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             canAttempt = false;
+
+            hint.gameObject.SetActive(false);
         }
     }
 
@@ -44,7 +55,17 @@ public class Lock : MonoBehaviour
             if (rollyCat.collectedObject)
             {
                 Unlock();
+                hint.gameObject.SetActive(false);
             }
         }
     }
+
+    private void Awake()
+    {
+        if (hint == null)
+        {
+            hint = FindObjectOfType<HintBillboard>();
+        }
+    }
+
 }

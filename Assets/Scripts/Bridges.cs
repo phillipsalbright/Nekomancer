@@ -41,5 +41,20 @@ public class Bridges : MonoBehaviour
         wheel.SetBridgesBuilt(false);
         bridgeBuilt = false;
         gameObject.SetActive(false);
+
+        StartCoroutine(RespawnTimer(5f));
+    }
+
+    private IEnumerator RespawnTimer(float time)
+    {
+        float elapsedTime = 0;
+
+        while (elapsedTime < time)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        gameObject.SetActive(true);
     }
 }
