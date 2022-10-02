@@ -11,6 +11,10 @@ public class HUD : MonoBehaviour
 
     [SerializeField]
     AudioSource catAudio;
+
+    [SerializeField]
+    AudioSource musicManager;
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -23,6 +27,7 @@ public class HUD : MonoBehaviour
             if (!paused)
             {
                 catAudio.Pause();
+                musicManager.Pause();
                 paused = true;
                 for (int i =0;i < notPauseMenu.Length; i++)
                 {
@@ -38,6 +43,7 @@ public class HUD : MonoBehaviour
     public void Resume()
     {
         catAudio.UnPause();
+        musicManager.UnPause();
         paused = false;
         pauseMenu.SetActive(false);
         Time.timeScale = 1;

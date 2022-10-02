@@ -135,11 +135,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FrogLegs (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 6535377470015516854, guid: 7a14126ac2314334198d948319ebcb00,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6535377470015516858, guid: 7a14126ac2314334198d948319ebcb00,
         type: 3}
       propertyPath: m_RootOrder

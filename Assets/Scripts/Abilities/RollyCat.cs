@@ -12,11 +12,17 @@ public class RollyCat : PlayerMovement
 
     public void OnEnable()
     {
+        base.OnEnable();
+        audioManager = GetComponent<AudioSource>();
+        audioManager.clip = activeClip;
+        audioManager.loop = true;
+        audioManager.Play();
         playerRB.useGravity = false;
     }
 
     public void OnDisable()
     {
+        audioManager.Stop();
         playerRB.useGravity = true;
     }
 
@@ -81,7 +87,7 @@ public class RollyCat : PlayerMovement
             }
         }
 
-        if (Physics.Raycast(this.transform.position, new Vector3(0, -1f, 0), 1.1f) && jumpPressed)
+        if (Physics.Raycast(this.transform.position, gravityDirection.normalized, 1.1f) && jumpPressed)
         {
             //jumpPressed = false;
             playerRB.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
