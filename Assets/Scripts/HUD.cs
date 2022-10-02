@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
     private bool paused;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject[] notPauseMenu;
+    [SerializeField] private Button selectedButton;
     // Start is called before the first frame update
 
     [SerializeField]
@@ -26,6 +28,7 @@ public class HUD : MonoBehaviour
         {
             if (!paused)
             {
+                selectedButton.Select();
                 catAudio.Pause();
                 musicManager.Pause();
                 paused = true;
