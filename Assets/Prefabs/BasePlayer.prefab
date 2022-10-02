@@ -5544,7 +5544,7 @@ MonoBehaviour:
   newSpeed: 100
   chargingZoomie: 0
   activeZoomie: 0
-  chargeTime: 1.5
+  chargeTime: 0.5
 --- !u!82 &2835352468902406284
 AudioSource:
   m_ObjectHideFlags: 0
