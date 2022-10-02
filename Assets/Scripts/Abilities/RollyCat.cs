@@ -9,6 +9,8 @@ public class RollyCat : PlayerMovement
     public float gravityStrength = 10f;
     public GameObject key;
 
+    private const int CLINGABLE_LAYER = 7;
+
     private Vector3 gravityDirection = Vector3.down;
     private bool collectedObject;
 
@@ -44,7 +46,10 @@ public class RollyCat : PlayerMovement
 
     public void OnCollisionEnter(Collision collision)
     {
-        gravityDirection = -collision.impulse.normalized;
+        if (collision.collider.gameObject.layer == CLINGABLE_LAYER)
+        {
+            gravityDirection = -collision.impulse.normalized;
+        }
     }
 
     public void OnCollisionExit(Collision collision)
