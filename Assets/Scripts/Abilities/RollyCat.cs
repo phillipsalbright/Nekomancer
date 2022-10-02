@@ -7,10 +7,12 @@ public class RollyCat : PlayerMovement
     [Header("Rolly Cat")]
     public float rotateAmt = 2f;
     public float gravityStrength = 10f;
+    public GameObject key;
 
     private Vector3 gravityDirection = Vector3.down;
+    private bool collectedObject;
 
-    public void OnEnable()
+    protected override void OnEnable()
     {
         base.OnEnable();
         audioManager = GetComponent<AudioSource>();
@@ -20,10 +22,24 @@ public class RollyCat : PlayerMovement
         playerRB.useGravity = false;
     }
 
-    public void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         audioManager.Stop();
         playerRB.useGravity = true;
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Collectible"))
+        {
+            CollectItem();
+            other.gameObject.SetActive(false);
+        }
+        else if (other.CompareTag("Chain"))
+        {
+            other.gameObject.GetComponent<Chain>().PullChain();
+        }
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -39,6 +55,18 @@ public class RollyCat : PlayerMovement
     public override void OnMove(InputAction.CallbackContext ctx)
     {
         base.OnMove(ctx);
+    }
+
+    private void CollectItem()
+    {
+        collectedObject = true;
+        key.SetActive(true);
+    }
+
+    private void RemoveItem()
+    {
+        collectedObject = false;
+        key.SetActive(false);
     }
 
     // Update is called once per frame
