@@ -113,6 +113,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingSprite: {fileID: 21300000, guid: 2781d6c3763f70342a17c82c2234e96e, type: 3}
   IngredientName: BeetlesBlood
+  relObj: {fileID: 0}
+  potionPot: {fileID: 0}
 --- !u!114 &-8700858589839194033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +162,10 @@ MonoBehaviour:
     m_ActionId: 96fc6f4a-8b37-40fd-8df0-99ee56dd3ae8
     m_ActionName: PlayerMove/Zoomie[/Keyboard/leftShift]
   - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c0dbc302-87fd-4349-9cab-e8d984884370
+    m_ActionName: PlayerMove/Interact[/Keyboard/e]
+  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7520581014931495961}
         m_TargetAssemblyTypeName: Ingredient, Assembly-CSharp
@@ -173,10 +179,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: c0dbc302-87fd-4349-9cab-e8d984884370
-    m_ActionName: PlayerMove/Interact[/Keyboard/e]
+    m_ActionId: c4ea79b1-ae9e-4add-994d-24aca99f493c
+    m_ActionName: PlayerInteract/Interact[/Keyboard/e,/XInputControllerWindows/buttonWest]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: PlayerMove
+  m_DefaultActionMap: PlayerInteract
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
