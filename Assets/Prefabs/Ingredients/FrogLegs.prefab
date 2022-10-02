@@ -32,7 +32,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3029392012080417913}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -51,7 +52,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6535377470015516854}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -113,6 +114,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingSprite: {fileID: 0}
   IngredientName: FrogLegs
+  relObj: {fileID: 0}
+  potionPot: {fileID: 0}
 --- !u!114 &-2393818717997146746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +163,10 @@ MonoBehaviour:
     m_ActionId: 96fc6f4a-8b37-40fd-8df0-99ee56dd3ae8
     m_ActionName: PlayerMove/Zoomie[/Keyboard/leftShift]
   - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c0dbc302-87fd-4349-9cab-e8d984884370
+    m_ActionName: PlayerMove/Interact[/Keyboard/e]
+  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6535377470015516861}
         m_TargetAssemblyTypeName: Ingredient, Assembly-CSharp
@@ -173,10 +180,85 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: c0dbc302-87fd-4349-9cab-e8d984884370
-    m_ActionName: PlayerMove/Interact[/Keyboard/e]
+    m_ActionId: c4ea79b1-ae9e-4add-994d-24aca99f493c
+    m_ActionName: PlayerInteract/Interact[/Keyboard/e,/XInputControllerWindows/buttonWest]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: PlayerMove
+  m_DefaultActionMap: PlayerInteract
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!1001 &8585840589270011900
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6535377470015516858}
+    m_Modifications:
+    - target: {fileID: 6225760112096844095, guid: e0cef9bd3898c8742bb8d03dd7b5f724,
+        type: 3}
+      propertyPath: m_Name
+      value: FrogLegs
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714171580637004677, guid: e0cef9bd3898c8742bb8d03dd7b5f724,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714171580637004677, guid: e0cef9bd3898c8742bb8d03dd7b5f724,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714171580637004677, guid: e0cef9bd3898c8742bb8d03dd7b5f724,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.254
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714171580637004677, guid: e0cef9bd3898c8742bb8d03dd7b5f724,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.259
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714171580637004677, guid: e0cef9bd3898c8742bb8d03dd7b5f724,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8144161
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714171580637004677, guid: e0cef9bd3898c8742bb8d03dd7b5f724,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.44957602
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714171580637004677, guid: e0cef9bd3898c8742bb8d03dd7b5f724,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.33696884
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714171580637004677, guid: e0cef9bd3898c8742bb8d03dd7b5f724,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.1451199
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714171580637004677, guid: e0cef9bd3898c8742bb8d03dd7b5f724,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -39.382
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714171580637004677, guid: e0cef9bd3898c8742bb8d03dd7b5f724,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 61.512
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714171580637004677, guid: e0cef9bd3898c8742bb8d03dd7b5f724,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -44.251
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e0cef9bd3898c8742bb8d03dd7b5f724, type: 3}
+--- !u!4 &3029392012080417913 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6714171580637004677, guid: e0cef9bd3898c8742bb8d03dd7b5f724,
+    type: 3}
+  m_PrefabInstance: {fileID: 8585840589270011900}
+  m_PrefabAsset: {fileID: 0}

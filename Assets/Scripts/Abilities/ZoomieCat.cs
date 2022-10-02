@@ -6,7 +6,6 @@ using System.Collections;
 public class ZoomieCat : PlayerMovement
 {
     private Coroutine speedCharge;
-    [SerializeField] GameObject[] boots;
     [SerializeField] private float speedMultiplier = 2f;
     [SerializeField] protected float newSpeed = 100f;
 
@@ -17,21 +16,42 @@ public class ZoomieCat : PlayerMovement
     [Header("Settings")]
     [SerializeField] private float chargeTime = 1.5f;
 
+    private bool isPressed = false;
+    private bool inTrigger = false;
+
+    public bool IsZooming()
+    {
+        return activeZoomie;
+    }
+
+    public bool IsInTrigger()
+    {
+        return inTrigger;
+    }
+
     protected override void FixedUpdate()
     {
         // If charging, LERP the cat speed to max
-        // If activeZoomie, multiply the cat speed
+        // If activeZoomie, multiply the cat spee
 
         //float speed = movementSpeed * (activeZoomie ? 2 : 1);
         base.FixedUpdate();
         if (activeZoomie)
         {
-            playerRB.AddForce(moveDir * (newSpeed * speedMultiplier), ForceMode.Acceleration);
-
+            anim.speed = 1;
+            if (!(movementDirection.x == 0 && movementDirection.z == 0))
+                playerRB.AddForce(moveDir * (newSpeed * speedMultiplier), ForceMode.Acceleration);
         }
-        if (playerRB.velocity.magnitude <= .05)
+        else if (audioManager.isPlaying && !chargingZoomie)
         {
-            SpeedBoost(false);
+            audioManager.Stop();
+        }
+        if (!activeZoomie && anim.GetBool("Walking")) {
+            anim.speed = .1f;
+        }
+        if (!anim.GetBool("Walking"))
+        {
+            anim.speed = 1f;
         }
     }
 
@@ -47,14 +67,18 @@ public class ZoomieCat : PlayerMovement
         {
             StopCoroutine(speedCharge);
         }
-
-        
     }
 
     IEnumerator ChangeCoroutine()
     {
+        chargingZoomie = true;
+        audioManager.clip = activeClip;
+        audioManager.loop = true;
+        audioManager.Play();
         yield return new WaitForSeconds(chargeTime);
-        SpeedBoost(true);
+        if (isPressed)
+            SpeedBoost(true);
+        chargingZoomie = false;
     }
 
     public void SpeedBoost(bool state)
@@ -64,16 +88,24 @@ public class ZoomieCat : PlayerMovement
         if (state)
         {
             //Debug.Log("Zoomie");
+            
         }
-        else
-        {
 
-            //Debug.Log("No Zoomie");
-        }
-       
-        foreach (var boot in boots)
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Trigger")
         {
-            boot.SetActive(state);
+            inTrigger = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Trigger")
+        {
+            inTrigger = false;
         }
     }
 
@@ -82,14 +114,22 @@ public class ZoomieCat : PlayerMovement
 
     public void OnZoomie(InputAction.CallbackContext ctx)
     {
+        if (!this.enabled)
+        {
+            return;
+        }
         //  && movementInput.x != 0 Check if movement direction is not 0
         //  !chargingZoomie && !activeZoomie &&  && movementDirection.magnitude > .05
         if (ctx.action.triggered)
         {
             ChargeZoomie(true);
+            isPressed = true;
         }
         else
         {
+            isPressed = false; 
+            audioManager.Stop();
+
             if (activeZoomie)
             {
                 SpeedBoost(false);

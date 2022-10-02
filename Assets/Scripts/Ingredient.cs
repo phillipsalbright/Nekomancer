@@ -14,6 +14,10 @@ public class Ingredient : MonoBehaviour
     protected bool ingredientPickup = false;
     protected InventorySystem invSystem;
 
+    public GameObject relObj;
+
+    public PotionPot potionPot;
+
     protected void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
@@ -36,8 +40,18 @@ public class Ingredient : MonoBehaviour
         if (ingredientPickup && ctx.performed)
         {
             invSystem.AddIngredient(this);
-            Destroy(gameObject);
+            if (relObj != null)
+            {
+                relObj.SetActive(true);
+            }
+            gameObject.SetActive(false);
+            ingredientPickup = false;
         }
+    }
+
+    public void Respawn()
+    {
+        gameObject.SetActive(true);
     }
 
     public Sprite GetSprite()
@@ -48,5 +62,20 @@ public class Ingredient : MonoBehaviour
     public string GetIngredientName()
     {
         return IngredientName;
+    }
+
+    private void OnPotUsed()
+    {
+        Respawn();
+    }
+
+    private void Start()
+    {
+        if (potionPot == null)
+        {
+            potionPot = FindObjectOfType<PotionPot>();
+        }
+
+        potionPot.PotUsedEvent += OnPotUsed;
     }
 }
