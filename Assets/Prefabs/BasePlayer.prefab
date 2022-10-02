@@ -5455,16 +5455,16 @@ MonoBehaviour:
   abilityState: 3
   activeClip: {fileID: 8300000, guid: 9bf17dd62bf9ea94fbd3460bee3d935c, type: 3}
   playerRB: {fileID: 3304710980469724914}
-  speed: 15
-  jumpForce: 7
+  speed: 25
+  jumpForce: 20
   turnSmoothTime: 0.1
-  dragVal: 2
+  dragVal: 3
   moveDir: {x: 0, y: 0, z: 0}
   cam: {fileID: 0}
   visuals: {fileID: 3304710980833476886}
   anim: {fileID: 0}
   rotateAmt: 2
-  gravityStrength: 10
+  gravityStrength: 50
   key: {fileID: 4326586783246629850}
 --- !u!114 &-3842208559128996588
 MonoBehaviour:
@@ -5649,7 +5649,7 @@ Transform:
   m_GameObject: {fileID: 3304710980833476886}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4784384286314757019}
@@ -6138,7 +6138,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4326586783246629850}
   m_LocalRotation: {x: 0.08986964, y: 0.70137256, z: 0.08986964, w: 0.70137256}
-  m_LocalPosition: {x: 0, y: 0.147, z: -0.59}
+  m_LocalPosition: {x: 0, y: 0.15, z: -0.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

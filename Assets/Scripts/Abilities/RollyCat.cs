@@ -62,6 +62,11 @@ public class RollyCat : PlayerMovement
         base.OnMove(ctx);
     }
 
+    public override void OnJump(InputAction.CallbackContext ctx)
+    {
+        base.OnJump(ctx);
+    }
+
     private void CollectItem()
     {
         collectedObject = true;
@@ -123,7 +128,7 @@ public class RollyCat : PlayerMovement
         if (Physics.Raycast(this.transform.position, gravityDirection.normalized, 1.1f) && jumpPressed)
         {
             //jumpPressed = false;
-            playerRB.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+            playerRB.AddForce(normalOfPlane * jumpForce, ForceMode.Impulse);
         }
 
         //Vector3 movementDirection = new Vector3(movementInput.x, 0, movementInput.y);

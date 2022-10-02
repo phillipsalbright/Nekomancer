@@ -40,7 +40,7 @@ public class PlayerMovement : Ability
         mouseInput = ctx.ReadValue<Vector2>().normalized;
     }
 
-    public void OnJump(InputAction.CallbackContext ctx)
+    public virtual void OnJump(InputAction.CallbackContext ctx)
     {
         if (ctx.action.triggered)
         {
