@@ -1,0 +1,52 @@
+Begin Object Class=/Script/Engine.Material Name="Flame_Mat"
+   Begin Object Class=/Script/Engine.MaterialExpressionPower Name="MaterialExpressionPower_2"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionTextureSample Name="MaterialExpressionTextureSample_1"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionTextureSample Name="MaterialExpressionTextureSample_2"
+   End Object
+   Begin Object Class=/Script/UnrealEd.SceneThumbnailInfoWithPrimitive Name="SceneThumbnailInfoWithPrimitive_0"
+   End Object
+   Begin Object Name="MaterialExpressionPower_2"
+      Base=(Expression=MaterialExpressionTextureSample'"Flame_Mat:MaterialExpressionTextureSample_1"',Mask=1,MaskR=1,MaskG=1,MaskB=1)
+      MaterialExpressionEditorX=-192
+      MaterialExpressionEditorY=-16
+      MaterialExpressionGuid=C84262EC4521F496737FACABD9B73C0D
+      Material=Material'"Flame_Mat"'
+   End Object
+   Begin Object Name="MaterialExpressionTextureSample_1"
+      Texture=Texture2D'"/Game/AlchemistsHouse/Assets/Textures/Flame.Flame"'
+      MaterialExpressionEditorX=-368
+      MaterialExpressionEditorY=-64
+      MaterialExpressionGuid=FE773D684A1F56C5DD2E68A9FDC8CEAF
+      Material=Material'"Flame_Mat"'
+   End Object
+   Begin Object Name="MaterialExpressionTextureSample_2"
+      Texture=Texture2D'"/Game/AlchemistsHouse/Assets/Textures/Flame_alpha.Flame_alpha"'
+      MaterialExpressionEditorX=-368
+      MaterialExpressionEditorY=192
+      MaterialExpressionGuid=66BC69A944D6DA65B43C9C8C58C30E18
+      Material=Material'"Flame_Mat"'
+   End Object
+   Begin Object Name="SceneThumbnailInfoWithPrimitive_0"
+   End Object
+   BaseColor=(Expression=MaterialExpressionTextureSample'"MaterialExpressionTextureSample_1"')
+   Specular=(Expression=MaterialExpressionTextureSample'"MaterialExpressionTextureSample_1"',Mask=1,MaskR=1,MaskG=1,MaskB=1)
+   EmissiveColor=(Expression=MaterialExpressionPower'"MaterialExpressionPower_2"')
+   Opacity=(Expression=MaterialExpressionTextureSample'"MaterialExpressionTextureSample_2"',Mask=1,MaskR=1,MaskG=1,MaskB=1)
+   OpacityMask=(Expression=MaterialExpressionTextureSample'"MaterialExpressionTextureSample_2"',Mask=1,MaskR=1,MaskG=1,MaskB=1)
+   BlendMode=BLEND_Translucent
+   ShadingModel=MSM_Unlit
+   ShadingModels=(ShadingModelField=1)
+   TwoSided=True
+   bUsedWithStaticLighting=True
+   Expressions(0)=MaterialExpressionTextureSample'"MaterialExpressionTextureSample_1"'
+   Expressions(1)=MaterialExpressionTextureSample'"MaterialExpressionTextureSample_2"'
+   Expressions(2)=MaterialExpressionPower'"MaterialExpressionPower_2"'
+   StateId=9F8AA2754E411DB43D4453A44EA48F49
+   CachedExpressionData=(ReferencedTextures=(Texture2D'"/Game/AlchemistsHouse/Assets/Textures/Flame.Flame"',Texture2D'"/Game/AlchemistsHouse/Assets/Textures/Flame_alpha.Flame_alpha"'),QualityLevelsUsed=(False,False,False,False))
+   ReferencedTextureGuids(0)=1CD606124BB5751625890A97316D24CE
+   ReferencedTextureGuids(1)=28CC36AD43A7021B7222C5965EC21D5A
+   ThumbnailInfo=SceneThumbnailInfoWithPrimitive'"SceneThumbnailInfoWithPrimitive_0"'
+   LightingGuid=85077F4B41AB28A5CA3A71A1C714A534
+End Object
