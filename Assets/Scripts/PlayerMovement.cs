@@ -24,13 +24,13 @@ public class PlayerMovement : Ability
         movementInput = ctx.ReadValue<Vector2>().normalized;
     }
 
-    protected void OnEnable()
+    protected virtual void OnEnable()
     {
         playerRB.drag = dragVal;
         visuals.SetActive(true);
     }
 
-    protected void OnDisable()
+    protected virtual void OnDisable()
     {
         visuals.SetActive(false);
     }
