@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 935cabe4c08dcac4d98be6280119d065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingSprite: {fileID: 0}
+  ingSprite: {fileID: 21300000, guid: 50411d6e024d25c42bf8977d63185a47, type: 3}
   IngredientName: Crystal
   relObj: {fileID: 0}
   potionPot: {fileID: 0}
@@ -222,7 +222,7 @@ PrefabInstance:
     - target: {fileID: 8535432726999162299, guid: ed1dcb2836881b94fb1fce58a7c29286,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.274
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8535432726999162299, guid: ed1dcb2836881b94fb1fce58a7c29286,
         type: 3}
