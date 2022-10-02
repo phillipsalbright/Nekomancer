@@ -6,30 +6,31 @@ public class PlayerMovement : Ability
 {
     protected Vector2 movementInput = new Vector2(0, 0);
     protected Vector3 movementDirection;
-    private Vector2 mouseInput = new Vector2(0, 0);
+    protected Vector2 mouseInput = new Vector2(0, 0);
     protected bool jumpPressed = false;
     [SerializeField] protected Rigidbody playerRB;
-    [SerializeField] private float speed = 10f;
-    [SerializeField] private float jumpForce = 10f;
-    [SerializeField] private float turnSmoothTime = .1f;
-    [SerializeField] private float dragVal = 2;
+    [SerializeField] protected float speed = 10f;
+    [SerializeField] protected float jumpForce = 10f;
+    [SerializeField] protected float turnSmoothTime = .1f;
+    [SerializeField] protected float dragVal = 2;
     [SerializeField] protected Vector3 moveDir;
-    float turnSmoothVelocity;
-    [SerializeField] private Transform cam;
+    protected float turnSmoothVelocity;
+    [SerializeField] protected Transform cam;
     [SerializeField] protected GameObject visuals;
     [SerializeField] protected Animator anim;
+
     public virtual void OnMove(InputAction.CallbackContext ctx)
     {
         movementInput = ctx.ReadValue<Vector2>().normalized;
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         playerRB.drag = dragVal;
         visuals.SetActive(true);
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         visuals.SetActive(false);
     }

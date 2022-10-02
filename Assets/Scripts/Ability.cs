@@ -10,6 +10,16 @@ public class Ability : MonoBehaviour
     [SerializeField]
     protected CatState.States abilityState;
 
+    protected AudioSource audioManager;
+
+    [SerializeField]
+    protected AudioClip activeClip;
+
+    private void Start()
+    {
+        audioManager = GetComponent<AudioSource>();
+    }
+
     public string GetStringRep()
     {
         List<string> ingredientNames = new List<string>();
