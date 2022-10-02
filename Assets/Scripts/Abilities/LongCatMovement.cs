@@ -5,8 +5,8 @@ using UnityEngine;
 public class LongCatMovement : PlayerMovement
 {
     [SerializeField] CapsuleCollider cc;
-    [SerializeField] GameObject capsule;
     [SerializeField] GameObject paws;
+    [SerializeField] GameObject kittyCat;
 
     bool extending = false;
     protected override void FixedUpdate()
@@ -27,8 +27,11 @@ public class LongCatMovement : PlayerMovement
             if (cc.height < 8)
             {
                 cc.height += .1f;
-                capsule.transform.localScale = new Vector3(1, cc.height / 2, 1);
-                paws.transform.localPosition = new Vector3(paws.transform.localPosition.x, cc.transform.localPosition.y + cc.height / 2 - .5f, paws.transform.localPosition.z);
+                //capsule.transform.localScale = new Vector3(1, cc.height / 2, 1);
+
+                anim.SetFloat("Blend", (cc.height - 2) / 6);
+                kittyCat.transform.localPosition = new Vector3(0, .11f - cc.height / 2 + 1, 0);
+                //paws.transform.localPosition = new Vector3(paws.transform.localPosition.x, cc.transform.localPosition.y + cc.height / 2 - .5f, paws.transform.localPosition.z);
             }
         } else
         {
@@ -41,7 +44,9 @@ public class LongCatMovement : PlayerMovement
             {
                 Vector3 newPos = new Vector3(cc.transform.localPosition.x, cc.transform.localPosition.y + cc.height / 2, cc.transform.localPosition.z);
                 cc.height = 2;
-                capsule.transform.localScale = new Vector3(1, cc.height / 2, 1);
+                //capsule.transform.localScale = new Vector3(1, cc.height / 2, 1);
+                anim.SetFloat("Blend", (cc.height - 2) / 6);
+                kittyCat.transform.localPosition = new Vector3(0, .11f - cc.height / 2 + 1, 0);
                 //cc.gameObject.transform.localPosition = newPos;
                 //capsule.gameObject.transform.localPosition = newPos;
                 this.transform.position += newPos;
