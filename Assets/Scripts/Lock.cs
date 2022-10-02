@@ -5,6 +5,9 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class Lock : MonoBehaviour
 {
+    [SerializeField]
+    GameObject door;
+
     bool canAttempt;
     RollyCat rollyCat;
 
@@ -13,6 +16,7 @@ public class Lock : MonoBehaviour
         // ADD OTHER UNLOCK FUNCTIONALITY HERE
         gameObject.SetActive(false);
         rollyCat.RemoveItem();
+        door.SetActive(false);
     }
 
     protected void OnTriggerEnter(Collider other)
