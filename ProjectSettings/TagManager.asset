@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Trigger
   - Collectible
+  - Chain
   layers:
   - Default
   - TransparentFX
