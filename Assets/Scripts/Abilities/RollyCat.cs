@@ -54,7 +54,10 @@ public class RollyCat : PlayerMovement
 
     public void OnCollisionExit(Collision collision)
     {
-        gravityDirection = Vector3.down;
+        if (collision.collider.gameObject.layer == CLINGABLE_LAYER)
+        {
+            gravityDirection = Vector3.down;
+        }
     }
 
     public override void OnMove(InputAction.CallbackContext ctx)
