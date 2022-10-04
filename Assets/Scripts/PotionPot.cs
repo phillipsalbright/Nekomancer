@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using static UnityEngine.InputSystem.InputAction;
 
 public class PotionPot : MonoBehaviour
 {
+    public delegate void PotUsed();
+    public event PotUsed PotUsedEvent;
+
     bool potionCraft = false;
     InventorySystem invSystem;
+
+    private HintBillboard hint;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,6 +20,10 @@ public class PotionPot : MonoBehaviour
         {
             potionCraft = true;
             invSystem = other.gameObject.GetComponentInParent<InventorySystem>();
+
+            hint.SetText("to mix ingredients");
+            hint.gameObject.SetActive(true);
+            hint.SetPosition(transform.position);
         }
     }
 
@@ -22,6 +32,8 @@ public class PotionPot : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             potionCraft = false;
+
+            hint.gameObject.SetActive(false);
         }
     }
 
@@ -30,6 +42,17 @@ public class PotionPot : MonoBehaviour
         if (potionCraft && ctx.performed)
         {
             invSystem.MakePotion();
+            hint.gameObject.SetActive(false);
+
+            PotUsedEvent.Invoke();
+        }
+    }
+
+    private void Awake()
+    {
+        if (hint == null)
+        {
+            hint = FindObjectOfType<HintBillboard>();
         }
     }
 }

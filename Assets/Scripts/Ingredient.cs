@@ -5,6 +5,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class Ingredient : MonoBehaviour
 {
+    public bool isLockedIngredient;
 
     [SerializeField]
     protected Sprite ingSprite;
@@ -16,12 +17,23 @@ public class Ingredient : MonoBehaviour
 
     public GameObject relObj;
 
+    public PotionPot[] potionPots = new PotionPot[4];
+
+    private HintBillboard hint;
+
     protected void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             ingredientPickup = true;
             invSystem = other.GetComponentInParent<InventorySystem>();
+
+            if (invSystem.counter < 3)
+            {
+                hint.SetText("to collect " + IngredientName);
+                hint.gameObject.SetActive(true);
+                hint.SetPosition(transform.position);
+            }
         }
     }
 
@@ -30,6 +42,8 @@ public class Ingredient : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             ingredientPickup = false;
+
+            hint.gameObject.SetActive(false);
         }
     }
 
@@ -37,12 +51,25 @@ public class Ingredient : MonoBehaviour
     {
         if (ingredientPickup && ctx.performed)
         {
-            invSystem.AddIngredient(this);
-            if (relObj != null)
+            if (invSystem.AddIngredient(this))
             {
-                relObj.SetActive(true);
+                if (relObj != null)
+                {
+                    relObj.GetComponent<Ingredient>().isLockedIngredient = false;
+                    relObj.GetComponent<Ingredient>().Respawn();
+                }
+                gameObject.SetActive(false);
+                ingredientPickup = false;
+                hint.gameObject.SetActive(false);
             }
-            Destroy(gameObject);
+        }
+    }
+
+    public void Respawn()
+    {
+        if (!isLockedIngredient)
+        {
+            gameObject.SetActive(true);
         }
     }
 
@@ -54,5 +81,25 @@ public class Ingredient : MonoBehaviour
     public string GetIngredientName()
     {
         return IngredientName;
+    }
+
+    private void OnPotUsed()
+    {
+        Respawn();
+    }
+
+    private void Awake()
+    {
+        potionPots = FindObjectsOfType<PotionPot>();
+
+        if (hint == null)
+        {
+            hint = FindObjectOfType<HintBillboard>();
+        }
+
+        foreach (PotionPot cauldron in potionPots)
+        {
+            cauldron.PotUsedEvent += OnPotUsed;
+        }
     }
 }

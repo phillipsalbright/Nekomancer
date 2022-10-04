@@ -10,12 +10,28 @@ public class Chain : MonoBehaviour
 
     private bool pulled;
 
+    [SerializeField]
+    List<GameObject> tapestries = new List<GameObject>();
+
+    private void Start()
+    {
+        foreach (GameObject tapestry in tapestries)
+        {
+            tapestry.SetActive(false);
+        }
+    }
+
     public void PullChain()
     {
         if (!pulled)
         {
             pulled = true;
-            StartCoroutine(SmoothLerp(pullDuration));  // 3f is the time in seconds the movement will take.
+            StartCoroutine(SmoothLerp(pullDuration));
+            // ADD OTHER CHAIN FUNCTIONALITY HERE
+            foreach (GameObject tapestry in tapestries)
+            {
+                tapestry.SetActive(true);
+            }
         }
     }
 

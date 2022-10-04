@@ -15,7 +15,7 @@ public class InventorySystem : MonoBehaviour
     Toggle FurOfCat;
 
     List<string> ingredients = new List<string>();
-    int counter = 0;
+    public int counter = 0;
     int mainCounter = 0;
 
     CatState catState;
@@ -32,15 +32,16 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    public void AddIngredient(Ingredient ingredient)
+    public bool AddIngredient(Ingredient ingredient)
     {
         if (counter == 3)
-            return;
+            return false;
         meowSource.Play();
         itemImages[counter].sprite = ingredient.GetSprite();
         itemImages[counter].gameObject.SetActive(true);
         ingredients.Add(ingredient.GetIngredientName());
         counter++;
+        return true;
     }
 
     public void AddMainIngredient(MainIngredient ingredient)

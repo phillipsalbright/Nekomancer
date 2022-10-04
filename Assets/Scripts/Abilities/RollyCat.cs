@@ -6,11 +6,19 @@ public class RollyCat : PlayerMovement
 {
     [Header("Rolly Cat")]
     public float rotateAmt = 2f;
-    public float gravityStrength = 10f;
+    public float defaultGravityStrength = 10f;
+
+    public float strongerGravityStrength = 150f;
+
     public GameObject key;
 
+    private const int CLINGABLE_LAYER = 7;
+
+    private float gravityStrength;
+
     private Vector3 gravityDirection = Vector3.down;
-    private bool collectedObject;
+    [HideInInspector]
+    public bool collectedObject;
 
     protected override void OnEnable()
     {
@@ -20,6 +28,7 @@ public class RollyCat : PlayerMovement
         audioManager.loop = true;
         audioManager.Play();
         playerRB.useGravity = false;
+        gravityStrength = defaultGravityStrength;
     }
 
     protected override void OnDisable()
@@ -31,6 +40,11 @@ public class RollyCat : PlayerMovement
 
     public void OnTriggerEnter(Collider other)
     {
+        if (!this.enabled)
+        {
+            return;
+        }
+
         if (other.CompareTag("Collectible"))
         {
             CollectItem();
@@ -44,17 +58,46 @@ public class RollyCat : PlayerMovement
 
     public void OnCollisionEnter(Collision collision)
     {
-        gravityDirection = -collision.impulse.normalized;
+        if (!this.enabled)
+        {
+            return;
+        }
+
+        if (collision.collider.gameObject.layer == CLINGABLE_LAYER)
+        {
+            playerRB.velocity = Vector3.zero;
+            gravityDirection = -collision.impulse.normalized;
+            gravityStrength = strongerGravityStrength;
+        }
     }
 
     public void OnCollisionExit(Collision collision)
     {
-        gravityDirection = Vector3.down;
+        if (!this.enabled)
+        {
+            return;
+        }
+
+        if (collision.collider.gameObject.layer == CLINGABLE_LAYER)
+        {
+            gravityDirection = Vector3.down;
+            gravityStrength = defaultGravityStrength;
+        }
     }
 
     public override void OnMove(InputAction.CallbackContext ctx)
     {
         base.OnMove(ctx);
+    }
+
+    public override void OnJump(InputAction.CallbackContext ctx)
+    {
+        base.OnJump(ctx);
+    }
+
+    public override void OnMouse(InputAction.CallbackContext ctx)
+    {
+        base.OnMouse(ctx);
     }
 
     private void CollectItem()
@@ -63,7 +106,7 @@ public class RollyCat : PlayerMovement
         key.SetActive(true);
     }
 
-    private void RemoveItem()
+    public void RemoveItem()
     {
         collectedObject = false;
         key.SetActive(false);
@@ -94,7 +137,7 @@ public class RollyCat : PlayerMovement
 
 
 
-            playerRB.AddForce(forwardMovement*speed * movementDirection.z, ForceMode.Acceleration);
+            playerRB.AddForce(forwardMovement * speed * movementDirection.z, ForceMode.Acceleration);
             playerRB.AddForce(sideMovement * speed * -movementDirection.x, ForceMode.Acceleration);
             if (movementDirection.x != 0)
             {
@@ -118,13 +161,22 @@ public class RollyCat : PlayerMovement
         if (Physics.Raycast(this.transform.position, gravityDirection.normalized, 1.1f) && jumpPressed)
         {
             //jumpPressed = false;
-            playerRB.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+            playerRB.AddForce(normalOfPlane * jumpForce, ForceMode.Impulse);
         }
+
+
 
         //Vector3 movementDirection = new Vector3(movementInput.x, 0, movementInput.y);
         //if (movementDirection.magnitude > .05)
         //{
         //    visuals.transform.Rotate(transform.right, rotateAmt);
         //}
+
+        float r = 0.5f;
+        float rollSpeed = 3;
+
+        Vector3 moveDelta = new Vector3(movementDirection.x * rollSpeed * Time.deltaTime, movementDirection.z * rollSpeed * Time.deltaTime, 0);
+        Vector3 rotationAxis = Vector3.Cross(moveDelta.normalized, transform.forward);
+        visuals.transform.RotateAround(visuals.transform.position, rotationAxis, Mathf.Sin(moveDelta.magnitude * r * 2 * Mathf.PI) * Mathf.Rad2Deg);
     }
 }
