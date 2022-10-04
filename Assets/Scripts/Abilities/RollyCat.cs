@@ -6,10 +6,15 @@ public class RollyCat : PlayerMovement
 {
     [Header("Rolly Cat")]
     public float rotateAmt = 2f;
-    public float gravityStrength = 10f;
+    public float defaultGravityStrength = 10f;
+
+    public float strongerGravityStrength = 150f;
+
     public GameObject key;
 
     private const int CLINGABLE_LAYER = 7;
+
+    private float gravityStrength;
 
     private Vector3 gravityDirection = Vector3.down;
     [HideInInspector]
@@ -23,6 +28,7 @@ public class RollyCat : PlayerMovement
         audioManager.loop = true;
         audioManager.Play();
         playerRB.useGravity = false;
+        gravityStrength = defaultGravityStrength;
     }
 
     protected override void OnDisable()
@@ -59,7 +65,9 @@ public class RollyCat : PlayerMovement
 
         if (collision.collider.gameObject.layer == CLINGABLE_LAYER)
         {
+            playerRB.velocity = Vector3.zero;
             gravityDirection = -collision.impulse.normalized;
+            gravityStrength = strongerGravityStrength;
         }
     }
 
@@ -73,6 +81,7 @@ public class RollyCat : PlayerMovement
         if (collision.collider.gameObject.layer == CLINGABLE_LAYER)
         {
             gravityDirection = Vector3.down;
+            gravityStrength = defaultGravityStrength;
         }
     }
 
@@ -128,7 +137,7 @@ public class RollyCat : PlayerMovement
 
 
 
-            playerRB.AddForce(forwardMovement*speed * movementDirection.z, ForceMode.Acceleration);
+            playerRB.AddForce(forwardMovement * speed * movementDirection.z, ForceMode.Acceleration);
             playerRB.AddForce(sideMovement * speed * -movementDirection.x, ForceMode.Acceleration);
             if (movementDirection.x != 0)
             {
@@ -168,6 +177,6 @@ public class RollyCat : PlayerMovement
 
         Vector3 moveDelta = new Vector3(movementDirection.x * rollSpeed * Time.deltaTime, movementDirection.z * rollSpeed * Time.deltaTime, 0);
         Vector3 rotationAxis = Vector3.Cross(moveDelta.normalized, transform.forward);
-        visuals.transform.RotateAround(visuals.transform.position, rotationAxis, Mathf.Sin(moveDelta.magnitude * r * 2 * Mathf.PI)  *Mathf.Rad2Deg);
+        visuals.transform.RotateAround(visuals.transform.position, rotationAxis, Mathf.Sin(moveDelta.magnitude * r * 2 * Mathf.PI) * Mathf.Rad2Deg);
     }
 }
