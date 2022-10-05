@@ -20,6 +20,10 @@ public class RollyCat : PlayerMovement
     [HideInInspector]
     public bool collectedObject;
 
+    private CinemachineVirtualCamera tempCamera;
+
+    bool onWall = false;
+
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -67,7 +71,14 @@ public class RollyCat : PlayerMovement
         {
             playerRB.velocity = Vector3.zero;
             gravityDirection = -collision.impulse.normalized;
+<<<<<<< Updated upstream
             gravityStrength = strongerGravityStrength;
+=======
+            tempCamera = collision.collider.gameObject.transform.parent.GetComponentInChildren<CinemachineVirtualCamera>();
+            tempCamera.Priority = 15;
+            tempCamera.Follow = transform;
+            onWall = true;
+>>>>>>> Stashed changes
         }
     }
 
@@ -81,7 +92,13 @@ public class RollyCat : PlayerMovement
         if (collision.collider.gameObject.layer == CLINGABLE_LAYER)
         {
             gravityDirection = Vector3.down;
+<<<<<<< Updated upstream
             gravityStrength = defaultGravityStrength;
+=======
+            tempCamera.Priority = 0;
+            tempCamera = null;
+            onWall = false;
+>>>>>>> Stashed changes
         }
     }
 
@@ -117,8 +134,20 @@ public class RollyCat : PlayerMovement
     {
         playerRB.AddForce(gravityDirection * gravityStrength);
         Vector3 normalOfPlane = (gravityDirection * -1).normalized;
-        Vector3 forwardMovement = Vector3.ProjectOnPlane(transform.position - cam.position, normalOfPlane).normalized;
-        Vector3 sideMovement = Vector3.Cross(forwardMovement, normalOfPlane).normalized;
+
+        Vector3 forwardMovement = Vector3.zero;
+        Vector3 sideMovement = Vector3.zero;
+        if (!onWall)
+        {
+            forwardMovement = Vector3.ProjectOnPlane(transform.position - cam.position, normalOfPlane).normalized;
+            sideMovement = Vector3.Cross(forwardMovement, normalOfPlane).normalized;
+        }
+        else
+        {
+            forwardMovement = tempCamera.transform.up;
+            sideMovement = -tempCamera.transform.right;
+        }
+
 
         movementDirection = new Vector3(movementInput.x, 0, movementInput.y);
 
