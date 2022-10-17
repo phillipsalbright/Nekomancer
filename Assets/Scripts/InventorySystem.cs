@@ -65,7 +65,7 @@ public class InventorySystem : MonoBehaviour
 
     public void MakePotion()
     {
-        if (mainCounter == 3)
+        if (WhiskerOfCat.isOn && ClawOfCat.isOn && FurOfCat.isOn)
         {
             catState.FinalState();
             return;
