@@ -21,6 +21,8 @@ public class RollyCat : PlayerMovement
     public bool collectedObject;
 
     private CinemachineVirtualCamera tempCamera;
+    private Vector3 tempCamPos;
+    public CinemachineFreeLook mainCamera;
 
     bool onWall = false;
 
@@ -69,16 +71,19 @@ public class RollyCat : PlayerMovement
 
         if (collision.collider.gameObject.layer == CLINGABLE_LAYER)
         {
-            playerRB.velocity = Vector3.zero;
+            //playerRB.velocity = Vector3.zero;
             gravityDirection = -collision.impulse.normalized;
-<<<<<<< Updated upstream
             gravityStrength = strongerGravityStrength;
-=======
-            tempCamera = collision.collider.gameObject.transform.parent.GetComponentInChildren<CinemachineVirtualCamera>();
-            tempCamera.Priority = 15;
-            tempCamera.Follow = transform;
+            if (collision.collider.gameObject.transform.parent.GetComponentInChildren<CinemachineVirtualCamera>() != null)
+            {
+                tempCamera = collision.collider.gameObject.transform.parent.GetComponentInChildren<CinemachineVirtualCamera>();
+                tempCamera.Priority = 15;
+                tempCamera.Follow = transform;
+                tempCamPos = tempCamera.transform.position;
+                //mainCamera.enabled = false;
+            }
+
             onWall = true;
->>>>>>> Stashed changes
         }
     }
 
@@ -92,13 +97,17 @@ public class RollyCat : PlayerMovement
         if (collision.collider.gameObject.layer == CLINGABLE_LAYER)
         {
             gravityDirection = Vector3.down;
-<<<<<<< Updated upstream
             gravityStrength = defaultGravityStrength;
-=======
-            tempCamera.Priority = 0;
-            tempCamera = null;
+            if (tempCamera != null)
+            {
+                tempCamera.Priority = 0;
+                tempCamera.Follow = null;
+                //mainCamera.transform.SetPositionAndRotation(tempCamera.transform.position, tempCamera.transform.rotation);
+                tempCamera.transform.position = tempCamPos;
+                tempCamera = null;
+                //mainCamera.enabled = true;
+            }
             onWall = false;
->>>>>>> Stashed changes
         }
     }
 
@@ -137,7 +146,7 @@ public class RollyCat : PlayerMovement
 
         Vector3 forwardMovement = Vector3.zero;
         Vector3 sideMovement = Vector3.zero;
-        if (!onWall)
+        if (!onWall || tempCamera == null)
         {
             forwardMovement = Vector3.ProjectOnPlane(transform.position - cam.position, normalOfPlane).normalized;
             sideMovement = Vector3.Cross(forwardMovement, normalOfPlane).normalized;
